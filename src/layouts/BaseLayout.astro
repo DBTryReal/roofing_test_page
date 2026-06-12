@@ -1,0 +1,87 @@
+---
+
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Carolina Prime Construction</title>
+    </head>
+    <body>
+        <header>
+            <h1>CONSTRUCTION & REMODELING LLC</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/gallery">Gallery</a></li>
+                    <!-- <li><a href="/kci-steps">KCI Steps</a></li>                     -->
+                    <!-- <li>
+                        <a href="/buildings-trailers">Buildings & Trailers</a>
+                    </li> -->
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <slot />
+        </main>
+    </body>
+</html>
+
+<style>
+    body {
+        margin: 0;
+    }
+
+    header {
+        background-color: #f9f6fc;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h1 {
+            margin: 0;
+        }
+
+        ul {
+            display: flex;
+            list-style: none;
+            gap: 16px;
+        }
+
+        a {
+            text-decoration: none;
+            border-bottom: 1px dashed;
+        }
+    }
+</style>
+
+<style is:global>
+    * {
+        font-family: "Poppins", sans-serif;
+        color: #333;
+    }
+
+    .content {
+        width: 100%;
+        max-width: 1200px;
+        margin: 60px auto;
+        padding: 0 20px;
+        box-sizing: border-box;
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+    }
+</style>
