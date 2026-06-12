@@ -1,5 +1,11 @@
 ---
-
+import { Image } from "astro:assets";
+// for light mode
+import logoLight from "../assets/logo-light.webp";
+// import logoLightBackground from "../assets/logo-light-background.webp";
+// for dark mode
+import logoDark from "../assets/logo-dark.webp";
+// import logoDarkBackground from "../assets/logo-dark-background.webp";
 ---
 
 <html lang="en">
@@ -9,11 +15,54 @@
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+            rel="stylesheet"
+        />
         <title>Carolina Prime Construction</title>
     </head>
     <body>
         <header>
-            <h1>CONSTRUCTION & REMODELING LLC</h1>
+            <a
+                href="/"
+                class="logo-link"
+                aria-label="Carolina Prime Construction - Ir al inicio"
+            >
+                <!-- <img
+                    src="/favicon.svg"
+                    alt="Carolina Prime Construction Logo"
+                    width="100"
+                    height="100"
+                    loading="eager"
+                    decoding="async"
+                    aria-hidden="false"
+                /> -->
+
+                <!-- Imagen para Modo Claro -->
+                <!-- src={logoLightBackground} -->
+                <Image
+                    src={logoLight}
+                    alt="Carolina Prime Construction Logo"
+                    width={100}
+                    height={100}
+                    loading="eager"
+                    decoding="async"
+                    class="logo-theme-light"
+                />
+                <!-- Imagen para Modo Oscuro -->
+                <!-- src={logoDarkBackground} -->
+                <Image
+                    src={logoDark}
+                    alt="Carolina Prime Construction Logo"
+                    width={100}
+                    height={100}
+                    loading="eager"
+                    decoding="async"
+                    class="logo-theme-dark"
+                />
+            </a>
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
@@ -46,6 +95,15 @@
         align-items: center;
         justify-content: space-between;
 
+        /* Estilos para el contenedor del logo y texto */
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            border-bottom: none; /* Quitamos la línea punteada heredada */
+        }
+
         h1 {
             margin: 0;
         }
@@ -59,6 +117,35 @@
         a {
             text-decoration: none;
             border-bottom: 1px dashed;
+        }
+    }
+
+    /* Por defecto, mostramos la versión clara y ocultamos la oscura */
+    .logo-theme-dark {
+        display: none !important;
+    }
+    .logo-theme-light {
+        display: block !important;
+    }
+
+    /* Cuando el sistema del visitante está en modo oscuro (o si cambias el header a negro) */
+    @media (prefers-color-scheme: dark) {
+        .logo-theme-light {
+            display: none !important;
+        }
+        .logo-theme-dark {
+            display: block !important;
+        }
+
+        /* Opcional: Ajusta el color del menú para que contraste en fondo oscuro */
+        header {
+            /* Fondo gris oscuro/negro */
+            background-color: #2e2e2e !important;
+        }
+
+        header nav a {
+            /* Texto de enlaces en blanco */
+            color: #fff !important;
         }
     }
 </style>
