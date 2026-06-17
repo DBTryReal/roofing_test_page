@@ -6,6 +6,7 @@ title: "Reparación Completa de Techos"
 tagline: "Sitios antiguos y lentos"
 price: 3000
 icon: "HEY"
+order: 4
 ---
 
 # Reparación de Techos Residenciales
