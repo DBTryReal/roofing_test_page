@@ -1,0 +1,24 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+// Genera una página por cada archivo .md en services/
+export async function getStaticPaths() {
+    const services = await getCollection("services");
+    return services.map((service) => ({
+        params: { id: service.id }, // "web-design", "seo", "branding"
+        props: { service },
+    }));
+}
+const { service } = Astro.props;
+const { Content } = await render(service);
+---
+
+<BaseLayout>
+    <div class="content">
+        <h1>{service.data.icon} {service.data.title}</h1>
+        <p class="tagline">{service.data.tagline}</p>
+        <p class="price">Desde <strong>${service.data.price}</strong></p>
+        <!-- Cuerpo del .md renderizado como HTML -->
+        <Content />
+    </div>
+</BaseLayout>

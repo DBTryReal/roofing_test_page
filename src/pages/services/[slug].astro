@@ -1,0 +1,50 @@
+---
+// // import { getCollection, render } from "astro:content";
+// import { getCollection, type CollectionEntry, render } from "astro:content";
+// import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// // 1. Generate a phisic page for each markdown file during the build
+// export async function getStaticPaths() {
+//     const services = await getCollection("service");
+//     // return services.map((service: CollectionEntry<"services">) => ({
+//     return services.map((service) => {
+//         // return services.map((service) => ({
+//         return {
+//             params: { slug: service.id },
+//             props: { service },
+//         };
+//     });
+// }
+// // export async function getStaticPaths() {
+// //     const serviceEntries = await getCollection("services");
+// //     // return serviceEntries.map((entry: CollectionEntry<"services">) => ({
+// //     return serviceEntries.map((entry: CollectionEntry<"services">) => ({
+// //         props: { entry },
+// //         params: { slug: entry.id },
+// //     }));
+// // }
+
+// // 2. Extract the typated data from properties
+// const { service } = Astro.props;
+
+// // 3. Get the markdown content compiled to native HTML
+// const { Content } = await render(service);
+---
+
+<!-- <BaseLayout>
+    <article class="content">
+        // <h1>{entry.data.title}</h1>
+        <h1>{service.data.title}</h1>
+        // <p class="summary">{entry.data.description}</p>
+        <p class="summary">{service.description}</p>
+        {
+            service.data.image && (
+                <img src={service.data.image} alt={service.data.title} />
+            )
+        }
+        <div class="content-body">
+            // The content component renderized
+            <Content />
+        </div>
+    </article>
+</BaseLayout>; -->

@@ -1,0 +1,35 @@
+---
+// // import type { CollectionEntry } from "astro:content";
+// import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// // interface Props {
+// //     service: CollectionEntry<"service">;
+// // }
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+// Carga todos los archivos .md de la carpeta services
+const services = await getCollection("services");
+---
+
+<!-- <BaseLayout>
+    <div class="content">
+        <h2>Services</h2>
+    </div>
+</BaseLayout> -->
+<BaseLayout>
+    <div class="content">
+        <h1>Nuestros Servicios</h1>
+        {
+            services.map((service) => (
+                <div class="service-card">
+                    <span>{service.data.icon}</span>
+                    <h2>{service.data.title}</h2>
+                    <p>{service.data.tagline}</p>
+                    <p>Desde ${service.data.price}</p>
+                    <a href={`/services/${service.id}`}>Ver más →</a>
+                </div>
+            ))
+        }
+    </div>
+</BaseLayout>
