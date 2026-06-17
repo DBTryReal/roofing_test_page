@@ -1,0 +1,98 @@
+---
+// src/components/ServiceCard.astro
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+    service: CollectionEntry<"services">;
+}
+
+const { service } = Astro.props;
+---
+
+<div class="service-card">
+    <span class="service-icon">{service.data.icon}</span>
+    <div class="service-info">
+        <h3 class="service-title">{service.data.title}</h3>
+        <p class="service-tagline">{service.data.tagline}</p>
+        <p class="service-price">
+            Desde <strong>${service.data.price} USD</strong>
+        </p>
+    </div>
+    <a href={`/services/${service.id}`} class="service-link"> Ver más → </a>
+</div>
+
+<style>
+    .service-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        background-color: #fff;
+        border: 1px solid #ebe5f2;
+        border-left: 5px solid #7c3aed;
+        padding: 24px;
+        margin-bottom: 16px;
+        border-radius: 0 8px 8px 0;
+        transition:
+            box-shadow 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .service-card:hover {
+        box-shadow: 4px 4px 0 #ebe5f2;
+        transform: translateY(-2px);
+    }
+
+    .service-icon {
+        font-size: 2.5rem;
+        flex-shrink: 0;
+        line-height: 1;
+    }
+
+    .service-info {
+        flex: 1;
+    }
+
+    .service-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin: 0 0 4px;
+    }
+
+    .service-tagline {
+        color: #666;
+        font-size: 0.95rem;
+        margin: 0 0 8px;
+    }
+
+    .service-price {
+        font-size: 0.9rem;
+        color: #888;
+        margin: 0;
+    }
+
+    .service-price strong {
+        /* color: #7c3aed; */
+        color: #395ca0;
+        font-size: 1rem;
+    }
+
+    .service-link {
+        align-self: center;
+        white-space: nowrap;
+        /* background-color: #7c3aed; */
+        background-color: #395ca0;
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: background-color 0.2s ease;
+    }
+
+    .service-link:hover {
+        /* background-color: #5b21b6; */
+        background-color: #293a8b;
+        color: #fff;
+    }
+</style>

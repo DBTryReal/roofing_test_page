@@ -13,7 +13,7 @@ interface Props {
     description?: string;
 }
 const {
-    title = "Mi Sitio Web",
+    title = "My website",
     description = "Sitio web sobre Roofing y construcción en Carolina del Norte",
 } = Astro.props;
 ---
@@ -38,14 +38,18 @@ const {
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
             rel="stylesheet"
         /> -->
+        <link rel="stylesheet" href="/styles/global.css" />
     </head>
+
     <body>
-        <header>
-            <a
-                href="/"
-                class="logo-link"
-                aria-label="Carolina Prime Construction - Ir al inicio"
-            >
+        <header class="site-header">
+            <div class="container">
+                <!-- <a href="/" class="site-logo">MiSitio</a> -->
+                <!-- <a
+                    href="/"
+                    class="logo-link"
+                    aria-label="Carolina Prime Construction - Ir al inicio"
+                > -->
                 <!-- <img
                     src="/favicon.svg"
                     alt="Carolina Prime Construction Logo"
@@ -57,85 +61,75 @@ const {
                 /> -->
 
                 <!-- Imagen para Modo Claro -->
-                <!-- src={logoLightBackground} -->
-                <Image
-                    src={logoLight}
-                    alt="Carolina Prime Construction Logo"
-                    width={160}
-                    height={160}
-                    loading="eager"
-                    decoding="async"
-                    class="logo-theme-light"
-                />
+                <!-- <Image
+                        src={logoLight}
+                        alt="Carolina Prime Construction Logo"
+                        width={160}
+                        height={160}
+                        loading="eager"
+                        decoding="async"
+                        class="logo-theme-light"
+                    /> -->
                 <!-- Imagen para Modo Oscuro -->
-                <!-- src={logoDarkBackground} -->
-                <Image
-                    src={logoDark}
-                    alt="Carolina Prime Construction Logo"
-                    width={160}
-                    height={160}
-                    loading="eager"
-                    decoding="async"
-                    class="logo-theme-dark"
-                />
-            </a>
-            <nav>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <li><a href="/gallery">Gallery</a></li>
-                    <!-- <li><a href="/kci-steps">KCI Steps</a></li>                     -->
-                    <!-- <li>
-                        <a href="/buildings-trailers">Buildings & Trailers</a>
-                    </li> -->
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <slot />
-        </main>
+                <!-- <Image
+                        src={logoDark}
+                        alt="Carolina Prime Construction Logo"
+                        width={160}
+                        height={160}
+                        loading="eager"
+                        decoding="async"
+                        class="logo-theme-dark"
+                    /> -->
+                <!-- </a> -->
 
-        <footer>
-            <!-- <a
-                href="/"
-                class="logo-link"
-                aria-label="Carolina Prime Construction - Ir al inicio"
-            >                
-                <Image
-                    src={logoLight}
-                    alt="Carolina Prime Construction Logo"
-                    width={300}
-                    height={300}
-                    loading="eager"
-                    decoding="async"
-                    class="logo-theme-light"
-                />                
-                <Image
-                    src={logoDark}
-                    alt="Carolina Prime Construction Logo"
-                    width={300}
-                    height={300}
-                    loading="eager"
-                    decoding="async"
-                    class="logo-theme-dark"
-                />
-            </a> -->
+                <nav class="site-nav">
+                    <a href="/">Home</a>
+                    <a href="/services">Services</a>
+                    <a href="/gallery">Gallery</a>
+                    <!-- <a href="/kci-steps">KCI Steps</a> -->
+                    <!-- <a href="/buildings-trailers">Buildings & Trailers</a> -->
+                    <a href="/about">About</a>
+                    <a href="/contact">Contact</a>
+                    <!-- <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/gallery">Gallery</a></li>
+                        <li><a href="/kci-steps">KCI Steps</a></li>
+                        <li>
+                            <a href="/buildings-trailers"
+                                >Buildings & Trailers</a
+                            >
+                        </li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul> -->
+                </nav>
+            </div>
+        </header>
+    </body>
+    <main class="site-main">
+        <!-- Aquí se inyecta el contenido de cada página -->
+        <slot />
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
             <p>
                 &copy; {new Date().getFullYear()} Carolina Prime Construction. All
                 rights reserved.
             </p>
-        </footer>
-    </body>
+        </div>
+    </footer>
 </html>
 
 <style>
-    body {
+    /* body {
         display: flex;
-        flex-direction: column;
-        min-height: 100vh; /* Ocupa el 100% del alto de la ventana */
-        margin: 0; /* Elimina márgenes por defecto */
+        flex-direction: column; */
+    /* Ocupa el 100% del alto de la ventana */
+    /* min-height: 100vh; */
+    /* Elimina márgenes por defecto */
+    /* margin: 0;
     }
 
     header {
@@ -143,15 +137,16 @@ const {
         padding: 0px 20px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-between; */
 
-        /* Estilos para el contenedor del logo y texto */
-        .logo-link {
+    /* Estilos para el contenedor del logo y texto */
+    /* .logo-link {
             display: flex;
             align-items: center;
             gap: 12px;
-            text-decoration: none;
-            border-bottom: none; /* Quitamos la línea punteada heredada */
+            text-decoration: none; */
+    /* Quitamos la línea punteada heredada */
+    /* border-bottom: none;
         }
 
         h1 {
@@ -168,53 +163,54 @@ const {
             text-decoration: none;
             border-bottom: 1px dashed;
         }
-    }
+    } */
 
-    main {
-        flex: 1; /* Hace que el main ocupe el espacio restante */
-    }
+    /* main { */
+    /* Hace que el main ocupe el espacio restante */
+    /* flex: 1;
+    } */
 
     /* Por defecto, mostramos la versión clara y ocultamos la oscura */
-    .logo-theme-dark {
+    /* .logo-theme-dark {
         display: none !important;
     }
     .logo-theme-light {
         display: block !important;
-    }
+    } */
 
     /* Cuando el sistema del visitante está en modo oscuro (o si cambias el header a negro) */
-    @media (prefers-color-scheme: dark) {
+    /* @media (prefers-color-scheme: dark) {
         .logo-theme-light {
             display: none !important;
         }
         .logo-theme-dark {
             display: block !important;
-        }
+        } */
 
-        /* Opcional: Ajusta el color del menú para que contraste en fondo oscuro */
-        header {
-            /* Fondo gris oscuro/negro */
-            background-color: #2e2e2e !important;
-        }
+    /* Opcional: Ajusta el color del menú para que contraste en fondo oscuro */
+    /* header { */
+    /* Fondo gris oscuro/negro */
+    /* background-color: #2e2e2e !important;
+        } */
 
-        header nav a {
-            /* Texto de enlaces en blanco */
-            color: #fff !important;
+    /* header nav a { */
+    /* Texto de enlaces en blanco */
+    /* color: #fff !important;
         }
-    }
+    } */
 
-    footer {
+    /* footer {
         background-color: #f9f6fc;
         padding: 10px 20px;
         text-align: center;
         vertical-align: middle;
         width: 100%;
         position: relative;
-    }
+    } */
 </style>
 
 <style is:global>
-    * {
+    /* * {
         box-sizing: border-box;
         font-family: "Poppins", sans-serif;
         color: #333;
@@ -234,5 +230,5 @@ const {
         p {
             font-size: 1.2rem;
         }
-    }
+    } */
 </style>

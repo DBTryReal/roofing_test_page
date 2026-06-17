@@ -1,8 +1,17 @@
 ---
 // // way 1: one file
+// import { Content, frontmatter } from "../content/about.md";
 // import BaseLayout from "../layouts/BaseLayout.astro";
 
-// import { Content, frontmatter } from "../content/about.md";
+//
+// CONCEPTO CLAVE:
+// getEntry("pages", "about") carga UN SOLO archivo de la colección.
+// El primer argumento es el nombre de la colección.
+// El segundo argumento es el ID del archivo (nombre sin extensión).
+// "about" corresponde a src/content/about.md
+//
+// render(about) convierte el markdown en un componente <Content />
+// que luego usamos en el template como si fuera cualquier componente Astro.
 
 // way 2: multiple files or one if not mare than 1
 import { getEntry, render } from "astro:content";
@@ -19,17 +28,82 @@ if (!about) {
 const { Content } = await render(about);
 ---
 
-<BaseLayout>
-    <div class="content">
+<BaseLayout title={`${about.data.title}`} description={about.data.description}>
+    <div class="page-content">
         <!-- way 1 -->
         <!-- <h1>{frontmatter.title}</h1>
         <p class="description">{frontmatter.description}</p> -->
 
         <!-- way 2 -->
-        <h1>{about.data.title}</h1>
-        <p class="description">{about.data.description}</p>
+        <!-- <h1>{about.data.title}</h1>
+        <p class="description">{about.data.description}</p> -->
 
-        <!-- Aquí se renderiza todo el cuerpo del markdown -->
-        <Content />
+        <!-- Encabezado de la página con datos del frontmatter -->
+        <header class="page-header">
+            <h1>{about.data.title}</h1>
+            <p class="page-description">{about.data.description}</p>
+            <!-- Datos opcionales del frontmatter (solo se muestran si existen) -->
+            {
+                about.data.founding_year && (
+                    <div class="about-meta">
+                        <span class="meta-item">
+                            📅 Fundados en {about.data.founding_year}
+                        </span>
+                        {about.data.team_size && (
+                            <span class="meta-item">
+                                👥 {about.data.team_size} personas
+                            </span>
+                        )}
+                        {about.data.location && (
+                            <span class="meta-item">
+                                📍 {about.data.location}
+                            </span>
+                        )}
+                    </div>
+                )
+            }
+        </header>
+
+        <!-- Aquí se renderiza TODO el cuerpo del archivo about.md -->
+        <!-- La clase "prose" activa los estilos de tipografía del global.css -->
+        <div class="prose">
+            <Content />
+        </div>
     </div>
 </BaseLayout>
+
+<style>
+    .page-header {
+        margin-bottom: 48px;
+        padding-bottom: 32px;
+        border-bottom: 3px solid #ebe5f2;
+    }
+    .page-header h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 12px;
+    }
+    .page-description {
+        font-size: 1.1rem;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+    .about-meta {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+    }
+    .meta-item {
+        background-color: #f9f6fc;
+        /* color: #7c3aed; */
+        color: #395ca0;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        border: 1px solid #ebe5f2;
+    }
+</style>

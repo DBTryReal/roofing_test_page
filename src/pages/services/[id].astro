@@ -1,24 +1,126 @@
 ---
+//
+// CONCEPTO CLAVE — getStaticPaths():
+// Astro es un generador de sitios estáticos. Necesita saber de antemano
+// cuántas páginas va a generar y cuál es la URL de cada una.
+//
+// getStaticPaths() le dice a Astro:
+//   "Para cada archivo .md que encuentres, crea una página en /services/{id}"
+//
+// params: { id: service.id }  →  el valor entre [] en la URL
+//   web-design.md  →  params.id = "web-design"  →  URL: /services/web-design
+//   seo.md         →  params.id = "seo"          →  URL: /services/seo
+//   branding.md    →  params.id = "branding"     →  URL: /services/branding
+//
+// props: { service }  →  datos disponibles en Astro.props dentro de la página
+
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-// Genera una página por cada archivo .md en services/
+
 export async function getStaticPaths() {
     const services = await getCollection("services");
+
     return services.map((service) => ({
         params: { id: service.id }, // "web-design", "seo", "branding"
         props: { service },
     }));
 }
+
+// Recibir el servicio como prop (definido arriba en getStaticPaths)
 const { service } = Astro.props;
+
+// Convertir el markdown del cuerpo a componente HTML
 const { Content } = await render(service);
 ---
 
-<BaseLayout>
-    <div class="content">
-        <h1>{service.data.icon} {service.data.title}</h1>
-        <p class="tagline">{service.data.tagline}</p>
-        <p class="price">Desde <strong>${service.data.price}</strong></p>
-        <!-- Cuerpo del .md renderizado como HTML -->
-        <Content />
+<BaseLayout title={`${service.data.title}`} description={service.data.tagline}>
+    <div class="page-content">
+        <!-- Encabezado con datos del frontmatter -->
+        <header class="service-header">
+            <span class="service-icon">{service.data.icon}</span>
+            <div>
+                <h1>{service.data.title}</h1>
+                <p class="service-tagline">{service.data.tagline}</p>
+                <p class="service-price">
+                    Inversión desde <strong>${service.data.price} USD</strong>
+                </p>
+            </div>
+        </header>
+
+        <!-- Botón de llamada a la acción -->
+        <a href="/contact" class="cta-btn"> Solicitar este servicio → </a>
+
+        <!-- Cuerpo completo del archivo .md renderizado como HTML -->
+        <div class="prose">
+            <Content />
+        </div>
+
+        <!-- Navegación para volver -->
+        <nav class="page-nav">
+            <a href="/services">← Todos los servicios</a>
+        </nav>
     </div>
 </BaseLayout>
+
+<style>
+    .service-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 24px;
+        margin-bottom: 28px;
+        padding-bottom: 28px;
+        border-bottom: 3px solid #ebe5f2;
+    }
+    .service-icon {
+        font-size: 3.5rem;
+        line-height: 1;
+        flex-shrink: 0;
+    }
+    .service-header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin: 0 0 8px;
+    }
+    .service-tagline {
+        color: #666;
+        font-size: 1rem;
+        margin: 0 0 12px;
+    }
+    .service-price {
+        font-size: 0.9rem;
+        color: #888;
+        margin: 0;
+    }
+    .service-price strong {
+        /* color: #7c3aed; */
+        color: #395ca0;
+        font-size: 1.1rem;
+    }
+    .cta-btn {
+        display: inline-block;
+        /* background-color: #7c3aed; */
+        background-color: #395ca0;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 48px;
+        transition: background-color 0.2s;
+    }
+    .cta-btn:hover {
+        /* background-color: #5b21b6; */
+        background-color: #293a8b;
+        color: #fff;
+    }
+    .page-nav {
+        margin-top: 48px;
+        padding-top: 24px;
+        border-top: 2px solid #ebe5f2;
+    }
+    .page-nav a {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+</style>

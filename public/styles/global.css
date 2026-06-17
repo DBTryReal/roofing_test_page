@@ -1,0 +1,189 @@
+/* ============================================================
+   RESET Y BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #2d2d2d;
+    background-color: #fafafa;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    /* color: #7c3aed; */
+    color: #395ca0;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    /* color: #5b21b6; */
+    color: #293a8b;
+}
+
+/* ============================================================
+   CONTENEDOR CENTRAL
+   ============================================================ */
+.container {
+    /* max-width: 900px; */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ============================================================
+   HEADER Y NAVEGACIÓN
+   ============================================================ */
+.site-header {
+    background-color: #fff;
+    border-bottom: 2px solid #ebe5f2;
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.site-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    /* color: #7c3aed; */
+    color: #395ca0;
+    letter-spacing: -0.5px;
+}
+
+.site-nav {
+    display: flex;
+    gap: 24px;
+}
+
+.site-nav a {
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.site-nav a:hover {
+    /* color: #7c3aed;
+    border-bottom-color: #7c3aed; */
+    color: #395ca0;
+    border-bottom-color: #395ca0;
+}
+
+/* ============================================================
+   MAIN Y CONTENIDO
+   ============================================================ */
+.site-main {
+    flex: 1;
+    padding: 48px 0;
+}
+
+.page-content {
+    /* max-width: 900px; */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ============================================================
+   TIPOGRAFÍA DEL CUERPO MARKDOWN
+   El componente <Content /> de Astro genera HTML puro.
+   Estos estilos aplican a ese HTML generado.
+   ============================================================ */
+.prose h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.prose h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2d2d2d;
+    margin: 36px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #ebe5f2;
+}
+
+.prose h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #3d3d3d;
+    margin: 24px 0 8px;
+}
+
+.prose p {
+    margin-bottom: 16px;
+    color: #444;
+    line-height: 1.75;
+}
+
+.prose ul,
+.prose ol {
+    padding-left: 24px;
+    margin-bottom: 16px;
+    color: #444;
+}
+
+.prose li {
+    margin-bottom: 6px;
+    line-height: 1.6;
+}
+
+.prose blockquote {
+    /* border-left: 4px solid #7c3aed; */
+    border-left: 4px solid #395ca0;
+    padding: 12px 20px;
+    margin: 24px 0;
+    background-color: #f9f6fc;
+    color: #555;
+    font-style: italic;
+    border-radius: 0 6px 6px 0;
+}
+
+.prose strong {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+    background-color: #1a1a1a;
+    color: #aaa;
+    padding: 24px 0;
+    text-align: center;
+    font-size: 0.875rem;
+    margin-top: auto;
+}

@@ -6,19 +6,34 @@
 // //     service: CollectionEntry<"service">;
 // // }
 
-import BaseLayout from "../../layouts/BaseLayout.astro";
+//
+// CONCEPTO CLAVE:
+// getCollection("services") carga TODOS los .md de la colección.
+// Devuelve un array de objetos, uno por cada archivo .md.
+// Aquí los ordenamos por el campo "order" del frontmatter.
+
 import { getCollection } from "astro:content";
-// Carga todos los archivos .md de la carpeta services
+import BaseLayout from "../../layouts/BaseLayout.astro";
+// import ServiceCard from "../../components/ServiceCard.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+
+// Carga todos los archivos .md (servicios y ordenarlos) de la carpeta services
 const services = await getCollection("services");
+
+// Ordenar por el campo "order" del frontmatter (ascendente)
+// Si no tienen order definido, quedan al final
+const sortedServices = services.sort((a, b) => {
+    const orderA = a.data.order ?? 999;
+    const orderB = b.data.order ?? 999;
+    return orderA - orderB;
+});
 ---
 
-<!-- <BaseLayout>
-    <div class="content">
-        <h2>Services</h2>
-    </div>
-</BaseLayout> -->
-<BaseLayout>
-    <div class="content">
+<BaseLayout
+    title="Services"
+    description="Diseño web, SEO e identidad de marca para tu negocio"
+>
+    <!-- <div class="content">
         <h1>Nuestros Servicios</h1>
         {
             services.map((service) => (
@@ -31,5 +46,45 @@ const services = await getCollection("services");
                 </div>
             ))
         }
+    </div> -->
+
+    <div class="page-content">
+        <header class="page-header">
+            <h1>Nuestros Servicios</h1>
+            <p>
+                Soluciones digitales a medida para negocios que quieren crecer.
+            </p>
+        </header>
+        <!-- Renderizar un ServiceCard por cada archivo .md -->
+        {sortedServices.map((service) => <ServiceCard service={service} />)}
+        <!-- Mensaje si no hay servicios (colección vacía) -->
+        {
+            sortedServices.length < 1 && (
+                <p class="empty-message">
+                    No hay servicios disponibles por el momento.
+                </p>
+            )
+        }
     </div>
 </BaseLayout>
+
+<style>
+    .page-header {
+        margin-bottom: 40px;
+    }
+    .page-header h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 8px;
+    }
+    .page-header p {
+        color: #666;
+        font-size: 1.05rem;
+    }
+    .empty-message {
+        text-align: center;
+        color: #999;
+        padding: 48px 0;
+    }
+</style>
