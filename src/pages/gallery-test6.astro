@@ -1,0 +1,452 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+
+// ① getCollection("gallery") carga y valida todos los .md de src/content/gallery/
+//   Falla en BUILD TIME si algún .md tiene datos inválidos según el schema Zod.
+//   Esto es una ventaja: los errores se detectan antes de llegar a producción.
+const allProjects = await getCollection("gallery");
+
+// ② Ordenar por el campo "order" del frontmatter (ascendente)
+const projects = allProjects.sort((a, b) => {
+  const oA = a.data.order ?? 999;
+  const oB = b.data.order ?? 999;
+  return oA - oB;
+});
+
+// ③ Proyecto destacado (featured: true en frontmatter)
+const featured = projects.find((p) => p.data.featured);
+
+// ④ El resto (sin el destacado)
+const rest = projects.filter((p) => !p.data.featured);
+
+// ⑤ Categorías únicas para los filtros
+const categories = [...new Set(projects.map((p) => p.data.category))];
+---
+
+<BaseLayout
+  title="Galería de Proyectos"
+  description="Galería de proyectos de roofing completados en Carolina del Norte: reparaciones, instalaciones y mantenimiento de techos."
+>
+  <section class="gallery-intro container">
+    <h1>Proyectos recientes</h1>
+    <p>
+      Trabajos destacados de reparación, instalación y mantenimiento de
+      techos en Carolina del Norte.
+    </p>
+    <!-- ⑥ Dato dinámico: total de proyectos — se actualiza solo al agregar .md -->
+    <span class="gallery-count">{projects.length} proyectos completados</span>
+  </section>
+
+  <!-- ⑦ PROYECTO DESTACADO
+    Se renderiza solo si hay un proyecto con featured: true en su frontmatter.
+    El operador && es el equivalente Astro a un if simple en JSX.
+    grid-column: span 2 → ocupa todo el ancho (ver CSS).
+  -->
+  {
+    featured && (
+      <div class="gallery-featured container">
+        <figure class="featured-item">
+          <div class="featured-img-wrap">
+            <!--
+              ⑧ Imagen destacada con dimensiones más grandes.
+              width={1200} height={700} → Astro genera una versión mayor
+              de la imagen para este uso específico.
+              quality={85} → balance entre calidad y peso del archivo.
+            -->
+            <Image
+              src={featured.data.image}
+              alt={featured.data.alt}
+              width={1200}
+              height={700}
+              loading="eager"
+              decoding="async"
+              quality={85}
+              class="featured-img"
+            />
+            <span class="featured-badge">Proyecto destacado</span>
+          </div>
+          <figcaption class="featured-caption">
+            <strong>{featured.data.title}</strong>
+            <span>{featured.data.location}</span>
+            <!--
+              ⑨ render() convierte el cuerpo Markdown del .md a HTML.
+              Permite incluir descripción rica del proyecto sin tocar el .astro.
+              El <Content /> renderiza el Markdown como HTML limpio.
+            -->
+            {
+              (async () => {
+                const { Content } = await render(featured);
+                return <Content />;
+              })()
+            }
+          </figcaption>
+        </figure>
+      </div>
+    )
+  }
+
+  <!-- FILTROS (mismo patrón que Propuesta 1) -->
+  <div
+    class="gallery-filters container"
+    role="group"
+    aria-label="Filtrar proyectos por categoría"
+  >
+    <button class="filter-btn active" data-filter="all" aria-pressed="true">
+      Todos ({rest.length})
+    </button>
+    {
+      categories.map((cat) => (
+        <button class="filter-btn" data-filter={cat} aria-pressed="false">
+          {cat.charAt(0).toUpperCase() + cat.slice(1)} (
+          {rest.filter((p) => p.data.category === cat).length})
+        </button>
+      ))
+    }
+  </div>
+
+  <!--
+    ⑩ GRID MASONRY (CSS columns) — OPCIÓN D
+    A diferencia de CSS Grid, `columns` permite que cada imagen mantenga
+    su proporción natural (sin recorte forzado a height fija).
+    Efecto visual tipo Pinterest, más dinámico y moderno.
+    El orden es top→bottom por columna, no left→right por fila.
+  -->
+  <div class="gallery-grid container" id="gallery-grid">
+    {
+      rest.map((project) => (
+        <figure
+          class="gallery-item"
+          data-category={project.data.category}
+        >
+          <div class="gallery-img-wrap">
+            <Image
+              src={project.data.image}
+              alt={project.data.alt}
+              width={800}
+              height={600}
+              loading="lazy"
+              decoding="async"
+              class="gallery-img"
+            />
+            <!--
+              ⑪ OPCIÓN D: Overlay con info + icono de zoom.
+              Muestra categoría como "chip/badge" coloreado.
+              El botón "ver más" es accesible por teclado.
+            -->
+            <div class="gallery-overlay" aria-hidden="true">
+              <span class={`category-badge category-${project.data.category}`}>
+                {project.data.category}
+              </span>
+              <div class="overlay-info">
+                <strong>{project.data.title}</strong>
+                <span>{project.data.location}</span>
+              </div>
+              <div class="overlay-zoom-icon">⤢</div>
+            </div>
+          </div>
+          <figcaption>
+            <strong>{project.data.title}</strong>
+            <span>{project.data.location}</span>
+          </figcaption>
+        </figure>
+      ))
+    }
+  </div>
+
+  <p class="gallery-empty container" id="gallery-empty" aria-live="polite" hidden>
+    No hay proyectos en esta categoría todavía.
+  </p>
+</BaseLayout>
+
+<style>
+  /* ── INTRO ────────────────────────────────────────── */
+  .gallery-intro {
+    padding: 48px 0 24px;
+    text-align: center;
+  }
+  .gallery-intro h1 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+  }
+  .gallery-intro p {
+    color: #666;
+    max-width: 560px;
+    margin: 0 auto 12px;
+    line-height: 1.6;
+  }
+  .gallery-count {
+    display: inline-block;
+    background: #eef2ff;
+    color: #395ca0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 999px;
+  }
+
+  /* ── PROYECTO DESTACADO ────────────────────────────── */
+  .gallery-featured {
+    padding-bottom: 40px;
+  }
+  .featured-item {
+    margin: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* Imagen izquierda, texto derecha */
+    background: #fff;
+  }
+  .featured-img-wrap {
+    position: relative;
+  }
+  .featured-img {
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    object-fit: cover;
+    display: block;
+  }
+  .featured-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: #395ca0;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .featured-caption {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+  }
+  .featured-caption strong {
+    font-size: 1.4rem;
+    color: #1a1a1a;
+  }
+  .featured-caption span {
+    color: #888;
+    font-size: 0.9rem;
+  }
+  /* El Markdown renderizado en el proyecto destacado */
+  .featured-caption p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    margin-top: 8px;
+  }
+  @media (max-width: 768px) {
+    .featured-item {
+      grid-template-columns: 1fr; /* En móvil: imagen arriba, texto abajo */
+    }
+    .featured-img { min-height: 220px; }
+    .featured-caption { padding: 20px; }
+  }
+
+  /* ── FILTROS (mismo que propuesta 1) ──────────────── */
+  .gallery-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 0 0 32px;
+  }
+  .filter-btn {
+    background: #f0f4f8;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    padding: 8px 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #555;
+    font-family: inherit;
+  }
+  .filter-btn:hover { border-color: #395ca0; color: #395ca0; }
+  .filter-btn.active,
+  .filter-btn[aria-pressed="true"] {
+    background: #395ca0;
+    color: #fff;
+    border-color: #395ca0;
+  }
+  .filter-btn:focus-visible {
+    outline: 3px solid #395ca0;
+    outline-offset: 2px;
+  }
+
+  /* ── GRID MASONRY (CSS columns) — OPCIÓN D ─────────── */
+  .gallery-grid {
+    columns: 3 260px;   /* 3 columnas ideales, mínimo 260px cada una */
+    column-gap: 20px;
+    padding-bottom: 64px;
+  }
+
+  /*
+  ══ OPCIÓN E: Panel lateral al hover (alternativa a lightbox) ═════
+  En lugar de un lightbox, al hacer hover en móvil/desktop aparece
+  un panel deslizante lateral. Más moderno, sin bloquear la página.
+  Requiere JS diferente (no se incluye aquí para no mezclar propuestas).
+  ══════════════════════════════════════════════════════════════════ */
+
+  /* ── ITEM ────────────────────────────────────────────── */
+  .gallery-item {
+    margin: 0 0 20px;
+    break-inside: avoid;    /* Evita que el item quede cortado entre columnas */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+    background: #fff;
+    transition: transform 0.25s, box-shadow 0.25s;
+    display: block;         /* Necesario para columns layout */
+  }
+  .gallery-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.13);
+  }
+  .gallery-item[hidden] { display: none; }
+
+  /* ── IMAGEN WRAP ─────────────────────────────────────── */
+  .gallery-img-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .gallery-img {
+    width: 100%;
+    height: auto;         /* Mantiene proporción natural (diferente a Propuesta 1) */
+    display: block;
+    transition: transform 0.35s ease;
+  }
+  .gallery-item:hover .gallery-img {
+    transform: scale(1.04);
+  }
+
+  /* ── OVERLAY ─────────────────────────────────────────── */
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(41, 58, 139, 0.9) 0%,
+      rgba(41, 58, 139, 0.2) 55%,
+      transparent 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .gallery-item:hover .gallery-overlay,
+  .gallery-item:focus-within .gallery-overlay {
+    /* focus-within activa el overlay cuando el foco está en cualquier hijo */
+    opacity: 1;
+  }
+  /* ── Category badge ─────────────────────────────────── */
+  .category-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+  }
+  /* Colores distintos por categoría para identificación rápida */
+  .category-reparacion    { background: rgba(239, 68, 68, 0.5); }
+  .category-instalacion   { background: rgba(57, 92, 160, 0.6); }
+  .category-mantenimiento { background: rgba(16, 185, 129, 0.5); }
+
+  .overlay-info {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    gap: 2px;
+    margin-top: auto;
+  }
+  .overlay-info strong { font-size: 0.9rem; font-weight: 600; }
+  .overlay-info span   { font-size: 0.78rem; opacity: 0.85; }
+
+  .overlay-zoom-icon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+  }
+
+  /* ── FIGCAPTION ──────────────────────────────────────── */
+  .gallery-item figcaption {
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .gallery-item figcaption strong { font-size: 0.88rem; color: #1a1a1a; }
+  .gallery-item figcaption span   { font-size: 0.78rem; color: #888; }
+
+  /* ── EMPTY STATE ─────────────────────────────────────── */
+  .gallery-empty {
+    text-align: center;
+    color: #888;
+    padding: 48px 24px;
+    font-size: 1rem;
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .gallery-grid {
+      columns: 2 160px;
+      column-gap: 12px;
+    }
+    .gallery-grid { padding-bottom: 48px; }
+  }
+</style>
+
+<!--
+  El JS de filtros es idéntico al de Propuesta 1.
+  No se necesita lightbox aquí (el overlay ya da la info relevante).
+  Si se quisiera agregar lightbox, se usaría el mismo código de Propuesta 1.
+-->
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+  const items = document.querySelectorAll<HTMLElement>(".gallery-item");
+  const emptyMsg = document.getElementById("gallery-empty")!;
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter!;
+
+      filterBtns.forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-pressed", "false");
+      });
+      btn.classList.add("active");
+      btn.setAttribute("aria-pressed", "true");
+
+      let visible = 0;
+      items.forEach((item) => {
+        const match = filter === "all" || item.dataset.category === filter;
+        item.hidden = !match;
+        if (match) visible++;
+      });
+
+      emptyMsg.hidden = visible > 0;
+    });
+  });
+</script>
