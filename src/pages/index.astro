@@ -1,84 +1,1156 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
+// 1. IMPORTACIÓN DE RECURSOS DE CONTRATACIÓN Y MULTIMEDIA (MORE/)
+import heroImg from "../assets/images/more/image1.webp";
+// import videoSrc from "../assets/images/more/video1.mp4";
+import videoSrc from "../assets/images/more/video1_horizontal.mp4";
+import aboutImg from "../assets/images/more/image2.webp";
+
+// Imágenes optimizadas para la grilla de proyectos recientes
+import proj1Img from "../assets/images/more/image8.webp";
+import proj2Img from "../assets/images/more/image9.webp";
+import proj3Img from "../assets/images/more/image12.webp";
+import proj4Img from "../assets/images/more/image15.webp";
+
+// 2. RECUPERACIÓN DINÁMICA DE SERVICIOS (Escalabilidad y Mantenibilidad)
+const services = await getCollection("services");
+const featuredServices = services
+	.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))
+	.slice(0, 4); // Mostramos solo los 4 principales en Home
+
+const recentProjects = [
+	{
+		image: proj1Img,
+		alt: "Instalación de techo residencial completada con teijas asfálticas de alta resistencia",
+		title: "Reemplazo de Techo Residencial",
+		location: "Charlotte, NC",
+	},
+	{
+		image: proj2Img,
+		alt: "Reparación completa de techumbre asfáltica bajo estándares de seguridad",
+		title: "Instalación de Tejas Asfálticas",
+		location: "Raleigh, NC",
+	},
+	{
+		image: proj3Img,
+		alt: "Estructuras de soporte y roofing estructural para naves comerciales",
+		title: "Remodelación Estructural de Techos",
+		location: "Greensboro, NC",
+	},
+	{
+		image: proj4Img,
+		alt: "Acabado final e inspección de sellos impermeables de tejas",
+		title: "Mantenimiento y Reparación de Goteras",
+		location: "Durham, NC",
+	},
+];
 ---
 
 <BaseLayout
-	title="Home"
-	description="Sitio web sobre Roofing y construcción en Carolina del Norte"
+	title="Inicio - Expertos en Roofing y Construcción en Carolina del Norte"
+	description="Soluciones profesionales de roofing, reparación y construcción residencial y comercial por Carolina Prime Construction. Cotizaciones gratuitas en NC."
 >
-	<div class="content page-content">
-		<section class="hero">
-			<h1>Creamos experiencias digitales que importan</h1>
-			<p class="hero-subtitle">
-				Diseño web, posicionamiento SEO e identidad de marca para
-				negocios que quieren destacar.
+	<!-- ============================================================
+     HERO SECTION CON VIDEO DE FONDO E IMAGEN DE RESPALDO (PERFORMANCE & UX)
+     ============================================================ -->
+	<section
+		class="hero-container"
+		aria-label="Bienvenida y servicios iniciales"
+	>
+		<div class="video-overlay" aria-hidden="true"></div>
+		<video
+			id="video1"
+			autoplay
+			muted
+			loop
+			playsinline
+			poster={heroImg.src}
+			class="hero-video"
+			aria-hidden="true"
+		>
+			<!-- <source src={videoSrc} type="video/mp4" /> -->
+		</video>
+
+		<!-- Fallback si la imagen se carga en lugar del vídeo por conexiones lentas -->
+		<div
+			class="hero-fallback-bg"
+			style={`background-image: url(${heroImg.src});`}
+		>
+		</div>
+
+		<div class="hero-content container">
+			<span class="hero-badge">Carolina Prime Construction</span>
+			<h1>La máxima protección y diseño para tu hogar</h1>
+			<p>
+				Instalación de techos premium, mantenimiento correctivo y
+				soluciones estructurales en Carolina del Norte. Profesionales
+				del sector de confianza absoluta.
 			</p>
 			<div class="hero-actions">
-				<a href="/services" class="btn-primary">Ver servicios</a>
-				<a href="/contact" class="btn-secondary">Contáctanos</a>
+				<a
+					href="/contact"
+					class="btn-primary"
+					aria-label="Solicitar cotización gratuita"
+				>
+					Inspección Gratis →
+				</a>
+				<a
+					href="/services"
+					class="btn-secondary"
+					aria-label="Ver todos los servicios"
+				>
+					Nuestros Servicios
+				</a>
 			</div>
-		</section>
-	</div>
+		</div>
+	</section>
+
+	<!-- ============================================================
+     BANNER DE CONFIANZA / ATRIBUTOS CLAVE (ACCESIBILIDAD Y A11Y)
+     ============================================================ -->
+	<section
+		class="trust-banner"
+		aria-label="Razones clave para confiar en nosotros"
+	>
+		<div class="container grid-trust">
+			<div class="trust-item">
+				<div class="icon-wrap">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="2"
+						stroke="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+						></path>
+					</svg>
+				</div>
+				<div>
+					<h3>100% Asegurados y Certificados</h3>
+					<p>Licencia para operar en toda Carolina del Norte.</p>
+				</div>
+			</div>
+
+			<div class="trust-item">
+				<div class="icon-wrap">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="2"
+						stroke="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0yz"
+						></path>
+					</svg>
+				</div>
+				<div>
+					<h3>Puntualidad y Rapidez</h3>
+					<p>Respuestas rápidas y presupuestos cerrados en 24h.</p>
+				</div>
+			</div>
+
+			<div class="trust-item">
+				<div class="icon-wrap">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="2"
+						stroke="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+						></path>
+					</svg>
+				</div>
+				<div>
+					<h3>Garantía Profesional</h3>
+					<p>Materiales premium garantizados por escrito.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ============================================================
+     SECCIÓN QUÉ HACEMOS (SERVICIOS DINÁMICOS DESDE CONTENT COLLECTIONS)
+     ============================================================ -->
+	<section class="services-teaser container">
+		<div class="section-header-cnt">
+			<span class="sec-subtitle">Nuestra especialidad</span>
+			<h2>Servicios Profesionales de Construcción</h2>
+			<p class="section-desc">
+				Ofrecemos soluciones integrales de instalación y reparación de
+				techuras diseñadas para soportar las condiciones climáticas del
+				sureste estadounidense.
+			</p>
+		</div>
+
+		<div class="services-grid">
+			{
+				featuredServices.map((service) => (
+					<article class="service-teaser-card">
+						<div class="service-media-icon">
+							{service.data.icon}
+						</div>
+						<div class="service-body">
+							<h3>{service.data.title}</h3>
+							<p>{service.data.tagline}</p>
+							<div class="card-footer">
+								<span class="service-badge-tag">
+									Garantizado
+								</span>
+								<a
+									href={`/services/${service.id}`}
+									class="text-link"
+									aria-label={`Saber más sobre ${service.data.title}`}
+								>
+									Saber más →
+								</a>
+							</div>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- ============================================================
+     SECCIÓN SOBRE NOSOTROS (EXPERIENCIA E HISTORIA CON RECURSO "image2.webp")
+     ============================================================ -->
+	<section class="about-highlight">
+		<div class="container grid-about">
+			<div class="about-media">
+				<Image
+					src={aboutImg}
+					alt="Profesionales de Carolina Prime Construction trabajando en la estructura del techo de un proyecto residencial"
+					width={600}
+					height={450}
+					quality={80}
+					loading="lazy"
+				/>
+				<div class="badge-stat">
+					<span class="stat-number">+10</span>
+					<span class="stat-text">Años Protegiendo Hogares en NC</span
+					>
+				</div>
+			</div>
+			<div class="about-text">
+				<span class="sec-subtitle">¿Quiénes somos?</span>
+				<h2>Compromiso absoluto, Calidad sin atajos</h2>
+				<p>
+					En <strong>Carolina Prime Construction</strong>, nuestra
+					prioridad es darte tranquilidad absoluta. Creemos
+					sinceramente que un techo es mucho más que tejas; es la
+					seguridad que cobija a las personas y negocios que
+					construyen el futuro de nuestra comunidad.
+				</p>
+				<p>
+					Con cada proyecto, cuidamos la precisión estética, los
+					estándares estructurales clave de seguridad y la entrega a
+					tiempo. Nos encargamos del proceso de principio a fin,
+					incluyendo la obtención de permisos o seguros.
+				</p>
+				<ul class="bullets-check">
+					<li>
+						<svg
+							class="check-svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							aria-hidden="true"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="3"
+								d="M5 13l4 4L19 7"></path></svg
+						>
+						Materiales evaluados de excelente durabilidad (shingles y
+						metal).
+					</li>
+					<li>
+						<svg
+							class="check-svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							aria-hidden="true"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="3"
+								d="M5 13l4 4L19 7"></path></svg
+						>
+						Ingeniería y mano de obra local altamente calificada.
+					</li>
+					<li>
+						<svg
+							class="check-svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							aria-hidden="true"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="3"
+								d="M5 13l4 4L19 7"></path></svg
+						>
+						Limpieza rigurosa e inspección post-proyecto.
+					</li>
+				</ul>
+				<a href="/about" class="btn-primary alt-btn"
+					>Conocer Nuestro Equipo</a
+				>
+			</div>
+		</div>
+	</section>
+
+	<!-- ============================================================
+     SECCIÓN GALERÍA DE PROYECTOS (ESTÍMULO VISUAL E INTERACCIÓN)
+     ============================================================ -->
+	<section class="gallery-teaser container">
+		<div class="section-header-cnt">
+			<span class="sec-subtitle">Nuestros Proyectos Recientes</span>
+			<h2>Resultados reales de los que nos sentimos orgullosos</h2>
+			<p class="section-desc">
+				Hogares reales transformados y protegidos. Explora nuestra
+				grilla interactiva y observa el nivel de detalle y solidez de
+				nuestros acabados.
+			</p>
+		</div>
+
+		<!-- Grilla interactiva interactiva que estimula la revisión detallada -->
+		<div class="gallery-interactive-grid">
+			{
+				recentProjects.map((proj) => (
+					<div class="proj-card-wrap">
+						<figure class="proj-card">
+							<div class="proj-img-box">
+								<Image
+									src={proj.image}
+									alt={proj.alt}
+									width={500}
+									height={380}
+									quality={85}
+									loading="lazy"
+									class="p-img"
+								/>
+								<div class="proj-overlay">
+									<div class="overlay-details">
+										<span class="proj-location">
+											{proj.location}
+										</span>
+										<h3 class="proj-title">{proj.title}</h3>
+										<p class="proj-cta-text">
+											Ver portafolio de fotos →
+										</p>
+									</div>
+								</div>
+							</div>
+						</figure>
+					</div>
+				))
+			}
+		</div>
+
+		<div class="gallery-cta">
+			<a
+				href="/gallery"
+				class="btn-primary"
+				aria-label="Ver todos los proyectos de la galería"
+			>
+				Ver Galería de Proyectos Completa
+			</a>
+		</div>
+	</section>
+
+	<!-- ============================================================
+     SECCIÓN DE "COMO TRABAJAMOS" (PASO A PASO / REDUCCIÓN DE DISONANCIA)
+     ============================================================ -->
+	<section class="workflow-section">
+		<div class="container">
+			<div class="section-header-cnt centered">
+				<span class="sec-subtitle">Proceso Transparente</span>
+				<h2>Tu camino hacia un techo seguro, paso a paso</h2>
+			</div>
+
+			<div class="steps-grid">
+				<div class="step-card">
+					<span class="step-num">01</span>
+					<h3>Inspección Inicial Gratis</h3>
+					<p>
+						Un ingeniero certificado evalúa el estado real y las
+						áreas críticas de tu techo de manera gratuita.
+					</p>
+				</div>
+
+				<div class="step-card">
+					<span class="step-num">02</span>
+					<h3>Cotización Transparente</h3>
+					<p>
+						Dividimos el presupuesto por partidas detalladas,
+						recomendándote la mejor opción técnica sin sorpresas
+						ocultas.
+					</p>
+				</div>
+
+				<div class="step-card">
+					<span class="step-num">03</span>
+					<h3>Construcción Rápida</h3>
+					<p>
+						Ejecutamos la instalación minimizando las molestias
+						operativas y garantizando plazos estrictos.
+					</p>
+				</div>
+
+				<div class="step-card">
+					<span class="step-num">04</span>
+					<h3>Entrega y Limpieza</h3>
+					<p>
+						Realizamos un barrido magnético de clavos, retiramos
+						escombros y validamos tu garantía de materiales.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ============================================================
+     CTA FINAL / BANNER DE ACCIÓN RÁPIDA (CONVERTIDOR DE TRÁFICO)
+     ============================================================ -->
+	<section class="cta-banner container">
+		<div class="cta-banner-box">
+			<div class="cta-text-cnt">
+				<h2>¿Preocupado por goteras o daños de tormentas recientes?</h2>
+				<p>
+					No dejes pasar más tiempo. El daño por agua silencioso
+					arruina la propiedad. Te damos una inspección sin
+					compromiso.
+				</p>
+			</div>
+			<div class="cta-action-cnt">
+				<a href="/contact" class="btn-primary btn-white-accent"
+					>Agendar Mi Inspección Gratis</a
+				>
+			</div>
+		</div>
+	</section>
 </BaseLayout>
 
 <style>
-	.hero {
-		padding: 80px 0 60px;
-		text-align: center;
+	/* ============================================================
+     ESTILOS HERO SECTION CON CONTEXTO VISUAL (MUTED BACKGROUND VIDEO)
+     ============================================================ */
+	.hero-container {
+		position: relative;
+		width: 100%;
+		min-height: 75vh; /* Altura generosa para Desktop */
+		display: flex;
+		align-items: center;
+		overflow: hidden;
+		color: #fff;
+		background-color: #1a1a1a; /* Background de respaldo */
+		padding: 100px 0;
 	}
-	.hero h1 {
-		font-size: 2.8rem;
+
+	/* El video ocupa todo el fondo dinámico */
+	.hero-video {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		min-width: 100%;
+		min-height: 100%;
+		width: auto;
+		height: auto;
+		z-index: 1;
+		transform: translate(-50%, -50%);
+		/* object-fit: cover; */
+		object-fit: contain;
+
+		/* way 2 */
+		/* 
+		min-width: unset;
+		min-height: unset;
+		width: 100vh;
+		height: 100vw;
+		transform: translate(-50%, -50%) rotate(90deg);
+		*/
+	}
+
+	.hero-fallback-bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		background-position: center;
+		z-index: 1;
+		opacity: 0.15; /* Sutil detalle por si el video no carga */
+		filter: grayscale(20%);
+	}
+
+	/* Overlay de degradado oscuro que garantiza el contraste WCAG 2.1 AAA de color */
+	.video-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(
+			135deg,
+			rgba(15, 23, 42, 0.9) 0%,
+			rgba(26, 43, 76, 0.75) 50%,
+			rgba(15, 23, 42, 0.4) 100%
+		);
+		z-index: 2;
+	}
+
+	/* Contenido legible gracias al z-index alto */
+	.hero-content {
+		position: relative;
+		z-index: 3;
+		max-width: 750px;
+	}
+
+	.hero-badge {
+		display: inline-block;
+		background-color: #395ca0;
+		color: #fff;
+		font-size: 0.85rem;
 		font-weight: 700;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		padding: 6px 14px;
+		border-radius: 50px;
+		margin-bottom: 24px;
+		box-shadow: 0 4px 10px rgba(57, 92, 160, 0.4);
+	}
+
+	.hero-container h1 {
+		font-size: 3.5rem;
 		line-height: 1.15;
-		color: #1a1a1a;
+		font-weight: 700;
 		margin-bottom: 20px;
-		max-width: 700px;
-		margin-left: auto;
-		margin-right: auto;
+		letter-spacing: -1px;
 	}
-	.hero-subtitle {
-		font-size: 1.15rem;
-		color: #666;
-		max-width: 520px;
-		margin: 0 auto 36px;
+
+	.hero-container p {
+		font-size: 1.25rem;
+		color: #e2e8f0;
 		line-height: 1.6;
+		margin-bottom: 40px;
 	}
+
 	.hero-actions {
 		display: flex;
 		gap: 16px;
-		justify-content: center;
 		flex-wrap: wrap;
 	}
+
+	/* ============================================================
+     ESTILOS DE BOTONES (UI/UX)
+     ============================================================ */
 	.btn-primary {
-		/* background-color: #7c3aed; */
 		background-color: #395ca0;
 		color: #fff;
-		padding: 12px 28px;
+		padding: 14px 28px;
 		border-radius: 6px;
 		font-weight: 600;
 		font-size: 1rem;
-		transition: background-color 0.2s;
+		border: none;
+		cursor: pointer;
+		box-shadow: 0 4px 15px rgba(57, 92, 160, 0.3);
+		transition: all 0.25s ease;
+		display: inline-block;
+		text-align: center;
 	}
+
 	.btn-primary:hover {
-		/* background-color: #5b21b6; */
 		background-color: #293a8b;
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(57, 92, 160, 0.45);
 		color: #fff;
 	}
+
 	.btn-secondary {
-		background-color: transparent;
-		/* color: #7c3aed; */
-		color: #395ca0;
-		padding: 12px 28px;
-		/* border: 2px solid #7c3aed; */
-		border: 2px solid #395ca0;
+		background-color: rgba(255, 255, 255, 0.1);
+		color: #fff;
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		padding: 14px 28px;
 		border-radius: 6px;
 		font-weight: 600;
 		font-size: 1rem;
-		transition:
-			background-color 0.2s,
-			color 0.2s;
+		transition: all 0.25s ease;
+		display: inline-block;
+		text-align: center;
+		backdrop-filter: blur(5px);
 	}
+
 	.btn-secondary:hover {
-		background-color: #f9f6fc;
+		background-color: rgba(255, 255, 255, 0.2);
+		border-color: #fff;
+		color: #fff;
+	}
+
+	/* ============================================================
+     BARRAN DE CONFIANZA (SERIEDAD DE MARCA)
+     ============================================================ */
+	.trust-banner {
+		background-color: #f1f5f9;
+		padding: 30px 0;
+		border-bottom: 1px solid #e2e8f0;
+	}
+
+	.grid-trust {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 32px;
+	}
+
+	.trust-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 16px;
+	}
+
+	.icon-wrap {
+		background-color: rgba(57, 92, 160, 0.1);
+		color: #395ca0;
+		padding: 10px;
+		border-radius: 8px;
+		flex-shrink: 0;
+	}
+
+	.icon-wrap svg {
+		width: 24px;
+		height: 24px;
+	}
+
+	.trust-item h3 {
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: #0f172a;
+		margin-bottom: 4px;
+	}
+
+	.trust-item p {
+		font-size: 0.9rem;
+		color: #64748b;
+		margin: 0;
+	}
+
+	/* ============================================================
+     SECCIÓN DE SERVICIOS DINÁMICOS
+     ============================================================ */
+	.services-teaser {
+		padding: 80px 24px;
+	}
+
+	.section-header-cnt {
+		max-width: 650px;
+		margin-bottom: 50px;
+	}
+
+	.section-header-cnt.centered {
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+
+	.sec-subtitle {
+		color: #395ca0;
+		font-size: 0.85rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		display: block;
+		margin-bottom: 12px;
+	}
+
+	.section-header-cnt h2 {
+		font-size: 2.25rem;
+		color: #0f172a;
+		font-weight: 700;
+		line-height: 1.2;
+		margin-bottom: 16px;
+	}
+
+	.section-desc {
+		font-size: 1.1rem;
+		color: #555;
+		line-height: 1.6;
+	}
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 24px;
+	}
+
+	.service-teaser-card {
+		background-color: #fff;
+		border: 1px solid #e2e8f0;
+		border-radius: 12px;
+		padding: 30px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+		transition: all 0.3s ease;
+	}
+
+	.service-teaser-card:hover {
+		transform: translateY(-5px);
+		box-shadow:
+			0 20px 25px -5deg rgba(0, 0, 0, 0.08),
+			0 10px 10px -5px rgba(0, 0, 0, 0.04);
+		border-color: rgba(57, 92, 160, 0.3);
+	}
+
+	.service-media-icon {
+		font-size: 2.5rem;
+		margin-bottom: 20px;
+	}
+
+	.service-body h3 {
+		font-size: 1.25rem;
+		color: #0f172a;
+		font-weight: 700;
+		margin-bottom: 8px;
+	}
+
+	.service-body p {
+		font-size: 0.95rem;
+		color: #64748b;
+		line-height: 1.5;
+		margin-bottom: 24px;
+	}
+
+	.card-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-top: 1px solid #f1f5f9;
+		padding-top: 16px;
+		margin-top: auto;
+	}
+
+	.service-badge-tag {
+		background-color: #f0fdf4;
+		color: #16a34a;
+		font-size: 0.75rem;
+		font-weight: 600;
+		padding: 4px 10px;
+		border-radius: 4px;
+	}
+
+	.text-link {
+		color: #395ca0;
+		font-weight: 600;
+		font-size: 0.9rem;
+		transition: color 0.2s ease;
+	}
+
+	.text-link:hover {
+		color: #293a8b;
+	}
+
+	/* ============================================================
+     SECCIÓN SOBRE NOSOTROS (EXPERIENCIA E HISTORIA DE APOYO)
+     ============================================================ */
+	.about-highlight {
+		background-color: #f8fafc;
+		padding: 90px 24px;
+		border-top: 1px solid #ebe5f2;
+		border-bottom: 1px solid #ebe5f2;
+	}
+
+	.grid-about {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		gap: 60px;
+		align-items: center;
+	}
+
+	.about-media {
+		position: relative;
+	}
+
+	.about-media img {
+		border-radius: 12px;
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+		object-fit: cover;
+		width: 100%;
+		height: auto;
+	}
+
+	.badge-stat {
+		position: absolute;
+		bottom: -20px;
+		right: -10px;
+		background-color: #fff;
+		padding: 20px;
+		border-radius: 12px;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+		display: flex;
+		flex-direction: column;
+		max-width: 180px;
+		border-left: 5px solid #395ca0;
+	}
+
+	.stat-number {
+		font-size: 2.25rem;
+		font-weight: 700;
+		color: #395ca0;
+		line-height: 1;
+		margin-bottom: 4px;
+	}
+
+	.stat-text {
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: #334155;
+		line-height: 1.3;
+	}
+
+	.about-text h2 {
+		font-size: 2.25rem;
+		font-weight: 700;
+		color: #0f172a;
+		line-height: 1.2;
+		margin-bottom: 24px;
+	}
+
+	.about-text p {
+		font-size: 1.05rem;
+		color: #475569;
+		line-height: 1.7;
+		margin-bottom: 20px;
+	}
+
+	.bullets-check {
+		list-style: none;
+		margin-bottom: 35px;
+		padding: 0;
+	}
+
+	.bullets-check li {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		font-size: 1rem;
+		font-weight: 500;
+		color: #334155;
+		margin-bottom: 12px;
+	}
+
+	.check-svg {
+		width: 20px;
+		height: 20px;
+		color: #395ca0;
+		flex-shrink: 0;
+	}
+
+	.btn-primary.alt-btn {
+		background-color: transparent;
+		color: #395ca0;
+		border: 2px solid #395ca0;
+		box-shadow: none;
+	}
+
+	.btn-primary.alt-btn:hover {
+		background-color: #395ca0;
+		color: #fff;
+	}
+
+	/* ============================================================
+     SECCIÓN GALERÍA DE PROYECTOS (ESTÍMULO VISUAL E INTERACCIÓN)
+     ============================================================ */
+	.gallery-teaser {
+		padding: 90px 24px;
+	}
+
+	.gallery-interactive-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 24px;
+	}
+
+	.proj-card-wrap {
+		perspective: 1000px; /* Soporta sensación 3D ligera */
+	}
+
+	.proj-card {
+		margin: 0;
+		overflow: hidden;
+		border-radius: 12px;
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+		background-color: #f1f5f9;
+	}
+
+	.proj-img-box {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		aspect-ratio: 4 / 3;
+	}
+
+	.proj-img-box .p-img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	/* Overlay interactivo en hover */
+	.proj-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(
+			to top,
+			rgba(15, 23, 42, 0.95) 0%,
+			rgba(15, 23, 42, 0.6) 60%,
+			rgba(15, 23, 42, 0.2) 100%
+		);
+		opacity: 0;
+		transition: opacity 0.35s ease;
+		display: flex;
+		align-items: flex-end;
+		padding: 24px;
+		z-index: 2;
+	}
+
+	.overlay-details {
+		transform: translateY(20px);
+		transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	.proj-location {
+		color: #93c5fd;
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 1.5px;
+		display: block;
+		margin-bottom: 6px;
+	}
+
+	.proj-title {
+		color: #fff;
+		font-size: 1.15rem;
+		font-weight: 700;
+		line-height: 1.3;
+		margin-bottom: 8px;
+	}
+
+	.proj-cta-text {
+		color: #fff;
+		font-size: 0.85rem;
+		font-weight: 600;
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		margin: 0;
+	}
+
+	/* Animaciones Hover para despertar el interés ("Visualizar e Inspeccionar") */
+	.proj-card-wrap:hover .p-img {
+		transform: scale(1.1);
+	}
+
+	.proj-card-wrap:hover .proj-overlay {
+		opacity: 1;
+	}
+
+	.proj-card-wrap:hover .overlay-details {
+		transform: translateY(0);
+	}
+
+	.gallery-cta {
+		margin-top: 48px;
+		text-align: center;
+	}
+
+	/* ============================================================
+     SECCIÓN PASO A PASO
+     ============================================================ */
+	.workflow-section {
+		background-color: #0f172a;
+		color: #fff;
+		padding: 90px 24px;
+	}
+
+	.workflow-section .sec-subtitle {
+		color: #395ca0;
+	}
+
+	.workflow-section h2 {
+		color: #fff !important;
+	}
+
+	.steps-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 32px;
+	}
+
+	.step-card {
+		background-color: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 12px;
+		padding: 32px;
+		transition: background-color 0.25s ease;
+	}
+
+	.step-card:hover {
+		background-color: rgba(255, 255, 255, 0.06);
+	}
+
+	.step-num {
+		font-size: 3rem;
+		font-weight: 800;
+		color: rgba(57, 92, 160, 0.4);
+		display: block;
+		line-height: 1;
+		margin-bottom: 20px;
+		font-family: "Poppins", sans-serif;
+	}
+
+	.step-card h3 {
+		font-size: 1.2rem;
+		font-weight: 700;
+		margin-bottom: 12px;
+	}
+
+	.step-card p {
+		font-size: 0.9rem;
+		color: #cbd5e1;
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	/* ============================================================
+     BANNER LLAMADO A LA ACCIÓN (CONVERSIÓN RÁPIDA)
+     ============================================================ */
+	.cta-banner {
+		padding: 80px 24px;
+	}
+
+	.cta-banner-box {
+		background-color: #395ca0;
+		border-radius: 16px;
+		padding: 48px 60px;
+		color: #fff;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 40px;
+		box-shadow: 0 20px 45px rgba(57, 92, 160, 0.25);
+	}
+
+	.cta-text-cnt {
+		max-width: 600px;
+	}
+
+	.cta-banner-box h2 {
+		font-size: 2rem;
+		font-weight: 700;
+		margin-bottom: 12px;
+		line-height: 1.2;
+	}
+
+	.cta-banner-box p {
+		font-size: 1.1rem;
+		color: #e2e8f0;
+		line-height: 1.5;
+		margin: 0;
+	}
+
+	.btn-white-accent {
+		background-color: #fff;
+		color: #395ca0;
+		padding: 16px 32px;
+		font-weight: 700;
+		font-size: 1.05rem;
+		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+	}
+
+	.btn-white-accent:hover {
+		background-color: #f1f5f9;
+		color: #293a8b;
+		transform: translateY(-2px);
+		box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+	}
+
+	/* ============================================================
+     DISEÑO RESPONSIVO (MOBILE FIRST INTERNALLY)
+     ============================================================ */
+	@media (max-width: 1024px) {
+		.cta-banner-box {
+			flex-direction: column;
+			text-align: center;
+			padding: 40px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.hero-container {
+			min-height: 550px;
+			padding: 60px 0;
+		}
+
+		.hero-container h1 {
+			font-size: 2.25rem;
+		}
+
+		.hero-container p {
+			font-size: 1.1rem;
+		}
+
+		.grid-about {
+			gap: 40px;
+		}
+
+		.badge-stat {
+			position: static;
+			margin-top: 20px;
+			max-width: 100%;
+		}
+
+		.services-teaser,
+		.about-highlight,
+		.gallery-teaser,
+		.workflow-section,
+		.cta-banner {
+			padding: 60px 16px;
+		}
 	}
 </style>
+
+<script>
+	// const video = document.getElementById("video1") as HTMLVideoElement | null;
+	// if (video) {
+	// 	video.addEventListener("loadedmetadata", () => {
+	// 		video.playbackRate = 0.4;
+	// 	});
+	// }
+</script>
