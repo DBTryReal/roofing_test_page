@@ -7,10 +7,11 @@
 // getStaticPaths() le dice a Astro:
 //   "Para cada archivo .md que encuentres, crea una página en /services/{id}"
 //
-// params: { id: service.id }  →  el valor entre [] en la URL
-//   web-design.md  →  params.id = "web-design"  →  URL: /services/web-design
-//   seo.md         →  params.id = "seo"          →  URL: /services/seo
-//   branding.md    →  params.id = "branding"     →  URL: /services/branding
+// params: { id: service.id }   →  el valor entre [] en la URL
+//   instalacion-residencial.md →  params.id = "instalacion-residencial" →  URL: /services/instalacion-residencial
+//   reparacion-goteras.md      →  params.id = "reparacion-goteras"      →  URL: /services/reparacion-goteras
+//   techado-comercial.md       →  params.id = "techado-comercial"       →  URL: /services/techado-comercial
+//   techos-de-metal.md         →  params.id = "techos-de-metal"         →  URL: /services/techos-de-metal
 //
 // props: { service }  →  datos disponibles en Astro.props dentro de la página
 
@@ -42,7 +43,7 @@ const { Content } = await render(service);
                 <h1>{service.data.title}</h1>
                 <p class="service-tagline">{service.data.tagline}</p>
                 <p class="service-price">
-                    Inversión desde <strong>${service.data.price} USD</strong>
+                    Estimado desde <strong>${service.data.price} USD</strong>
                 </p>
             </div>
         </header>
