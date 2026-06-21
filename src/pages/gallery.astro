@@ -93,13 +93,16 @@ const categories = [...new Set(projects.map((p) => p.category))];
     h1: debe haber SOLO UN h1 por página. Es el encabezado principal para SEO.
     El actual gallery.astro usa h2 — esto es un error SEO si no hay h1 padre.
     class="container" centra el contenido respetando el max-width global.
-  -->
-  <section class="gallery-intro container">
-    <h1>Proyectos recientes</h1>
-    <p>
-      Explora nuestros trabajos destacados en reparación, instalación y
-      mantenimiento de techos en Carolina del Norte.
-    </p>
+  -->  
+  <section class="page-hero">
+    <div class="container">
+      <span class="sec-subtitle">Nuestros Proyectos</span>
+      <h1>Galería de Proyectos</h1>
+      <p>
+        Explora nuestros trabajos destacados en reparación, instalación y
+        mantenimiento de techos en Carolina del Norte.
+      </p>
+    </div>
   </section>
 
   <!-- ⑦ FILTROS
@@ -265,27 +268,54 @@ const categories = [...new Set(projects.map((p) => p.category))];
       ›
     </button>
   </dialog>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner container">
+    <div class="cta-banner-box">
+      <div class="cta-text-cnt">
+        <h2>¿Listo para tu próximo proyecto?</h2>
+        <p>
+          Contáctanos hoy y recibe una inspección gratuita y un
+          presupuesto detallado en menos de 24 horas.
+        </p>
+      </div>
+      <div class="cta-action-cnt">
+        <a href="/contact" class="btn-white-accent">
+          Solicitar Cotización Gratis →
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  /* ── INTRO ──────────────────────────────────────────────────────── */
-  .gallery-intro {
-    padding: 48px 0 24px;
-    text-align: center;
+  /* ── HERO DE PÁGINA ─────────────────────────────────────────────── */
+  .page-hero {
+    background-color: #0f172a;
+    color: #fff;
+    padding: 80px 24px;
   }
-  .gallery-intro h1 {
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    /* clamp(min, preferred, max) → responsive sin media queries */
+  .sec-subtitle {
+    color: #395ca0;
+    font-size: 0.85rem;
     font-weight: 700;
-    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
     margin-bottom: 12px;
   }
-  .gallery-intro p {
-    color: #666;
-    max-width: 560px;
-    margin: 0 auto;
-    font-size: 1.05rem;
+  .page-hero h1 {
+    font-size: 2.75rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+  }
+  .page-hero p {
+    font-size: 1.15rem;
+    color: #cbd5e1;
     line-height: 1.6;
+    max-width: 600px;
   }
 
   /* ── FILTROS ─────────────────────────────────────────────────────── */
@@ -295,6 +325,7 @@ const categories = [...new Set(projects.map((p) => p.category))];
     gap: 8px;
     justify-content: center;
     padding: 0 0 32px;
+    margin-top: 80px;
   }
   .filter-btn {
     background: #f0f4f8;
@@ -327,7 +358,7 @@ const categories = [...new Set(projects.map((p) => p.category))];
 
   /* ── GRID ────────────────────────────────────────────────────────── */
 
-  /* ══ OPCIÓN A: Uniform grid (limpio, profesional) ════════════════
+  /* ══ Uniform grid (limpio, profesional) ════════════════
     auto-fill: crea TODAS las columnas que quepan en el ancho disponible
     minmax(280px, 1fr): cada columna tiene mínimo 280px y máximo 1fr
     Efecto: en pantalla grande → 3-4 columnas, en tablet → 2, en móvil → 1
@@ -337,61 +368,10 @@ const categories = [...new Set(projects.map((p) => p.category))];
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
-    padding-bottom: 64px;
+    padding-bottom: 64px;    
     /* Evita que items con caption diferente se estiren */
     align-items: start; 
   }
-
-  /* ═══ OPCIÓN B: Featured + grid (primer proyecto destacado) ════════
-  El primer item ocupa 2 columnas y 2 filas → resalta el mejor proyecto.
-  Requiere grid con número fijo de columnas (3 en este caso). 
-  ══════════════════════════════════════════════════════════════════ */
-
-  /* .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding-bottom: 64px;
-  }
-  .gallery-item:first-child {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-  .gallery-item:first-child .gallery-img {
-    height: 100%;
-    min-height: 460px;
-  }
-  @media (max-width: 768px) {
-    .gallery-grid { grid-template-columns: 1fr; }
-    .gallery-item:first-child {
-      grid-column: span 1;
-      grid-row: span 1;
-    }
-    .gallery-item:first-child .gallery-img { min-height: 220px; }
-  } */
-
-  /* ══ OPCIÓN C: Masonry con CSS columns ════════════════════════════
-  columns crea columnas de estilo periódico/Pinterest.
-  Las imágenes mantienen su proporción real (no se recortan a altura fija).
-  break-inside: avoid → evita que una <figure> quede cortada entre columnas.
-  Sin JS necesario para el layout.
-  Desventaja: el orden es columna por columna, no fila por fila.
-  ══════════════════════════════════════════════════════════════════ */
-
-  /* .gallery-grid {
-    columns: 3 280px;
-    column-gap: 20px;
-    padding-bottom: 64px;
-  }
-  .gallery-item {
-    break-inside: avoid;
-    margin-bottom: 20px; */
-    /* columns no funciona bien con grid/flex internos */
-    /* display: block;
-  }
-  @media (max-width: 640px) {
-    .gallery-grid { columns: 2 160px; }
-  } */
 
   /* ── ITEM ────────────────────────────────────────────────────────── */
   .gallery-item {
@@ -595,13 +575,69 @@ const categories = [...new Set(projects.map((p) => p.category))];
     outline-offset: 2px;
   }
 
+  /* ── CTA BANNER ─────────────────────────────────────────────────── */
+  .cta-banner {
+    padding: 80px 24px;
+  }
+  .cta-banner-box {
+    background-color: #395ca0;
+    border-radius: 16px;
+    padding: 48px 60px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 20px 45px rgba(57, 92, 160, 0.25);
+  }
+  .cta-text-cnt {
+    max-width: 600px;
+  }
+  .cta-banner-box h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .cta-banner-box p {
+    font-size: 1.1rem;
+    color: #e2e8f0;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .btn-white-accent {
+    display: inline-block;
+    background-color: #fff;
+    color: #395ca0;
+    padding: 16px 32px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    white-space: nowrap;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease;
+  }
+  .btn-white-accent:hover {
+    background-color: #f1f5f9;
+    color: #293a8b;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+
   /* ── RESPONSIVE ──────────────────────────────────────────────────── */
   @media (max-width: 640px) {
     .gallery-grid {
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 12px;
     }
-    .gallery-intro { padding: 32px 0 16px; }
+    .page-hero { padding: 60px 16px; }
+    .page-hero h1 { font-size: 2rem; }
+    .cta-banner { padding: 60px 16px; }
+    .cta-banner-box {
+      flex-direction: column;
+      text-align: center;
+      padding: 40px;
+    }
     .lightbox-figure { padding: 52px 12px 32px; }
     /* En móvil se navega con swipe (ver JS), los botones sobran */
     .lightbox-nav { display: none; }
