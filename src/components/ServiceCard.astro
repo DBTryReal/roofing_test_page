@@ -9,90 +9,92 @@ interface Props {
 const { service } = Astro.props;
 ---
 
-<div class="service-card">
-    <span class="service-icon">{service.data.icon}</span>
-    <div class="service-info">
-        <h3 class="service-title">{service.data.title}</h3>
-        <p class="service-tagline">{service.data.tagline}</p>
-        <p class="service-price">
-            Desde <strong>${service.data.price} USD</strong>
-        </p>
+<article class="service-teaser-card">
+    <div class="service-media-icon">
+        {service.data.icon}
     </div>
-    <a href={`/services/${service.id}`} class="service-link"> Ver más → </a>
-</div>
+    <div class="service-body">
+        <h3>{service.data.title}</h3>
+        <p>{service.data.tagline}</p>
+        <div class="card-footer">
+            <span class="service-badge-tag">Garantizado</span>
+            <a
+                href={`/services/${service.id}`}
+                class="text-link"
+                aria-label={`Saber más sobre ${service.data.title}`}
+            >
+                Saber más →
+            </a>
+        </div>
+    </div>
+</article>
 
 <style>
-    .service-card {
-        display: flex;
-        align-items: flex-start;
-        gap: 20px;
+    .service-teaser-card {
         background-color: #fff;
-        border: 1px solid #ebe5f2;
-        border-left: 5px solid #7c3aed;
-        padding: 24px;
-        margin-bottom: 16px;
-        border-radius: 0 8px 8px 0;
-        transition:
-            box-shadow 0.2s ease,
-            transform 0.2s ease;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
     }
 
-    .service-card:hover {
-        box-shadow: 4px 4px 0 #ebe5f2;
-        transform: translateY(-2px);
+    .service-teaser-card:hover {
+        transform: translateY(-5px);
+        box-shadow:
+            0 20px 25px -5px rgba(0, 0, 0, 0.08),
+            0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        border-color: rgba(57, 92, 160, 0.3);
     }
 
-    .service-icon {
+    .service-media-icon {
         font-size: 2.5rem;
-        flex-shrink: 0;
-        line-height: 1;
+        margin-bottom: 20px;
     }
 
-    .service-info {
-        flex: 1;
-    }
-
-    .service-title {
-        font-size: 1.2rem;
+    .service-body h3 {
+        font-size: 1.25rem;
+        color: #0f172a;
         font-weight: 700;
-        color: #1a1a1a;
-        margin: 0 0 4px;
+        margin-bottom: 8px;
     }
 
-    .service-tagline {
-        color: #666;
+    .service-body p {
         font-size: 0.95rem;
-        margin: 0 0 8px;
+        color: #64748b;
+        line-height: 1.5;
+        margin-bottom: 24px;
     }
 
-    .service-price {
-        font-size: 0.9rem;
-        color: #888;
-        margin: 0;
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 16px;
+        margin-top: auto;
     }
 
-    .service-price strong {
-        /* color: #7c3aed; */
-        color: #395ca0;
-        font-size: 1rem;
-    }
-
-    .service-link {
-        align-self: center;
-        white-space: nowrap;
-        /* background-color: #7c3aed; */
-        background-color: #395ca0;
-        color: #fff;
-        padding: 8px 16px;
-        border-radius: 6px;
-        font-size: 0.85rem;
+    .service-badge-tag {
+        background-color: #f0fdf4;
+        color: #16a34a;
+        font-size: 0.75rem;
         font-weight: 600;
-        transition: background-color 0.2s ease;
+        padding: 4px 10px;
+        border-radius: 4px;
     }
 
-    .service-link:hover {
-        /* background-color: #5b21b6; */
-        background-color: #293a8b;
-        color: #fff;
+    .text-link {
+        color: #395ca0;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: color 0.2s ease;
+    }
+
+    .text-link:hover {
+        color: #293a8b;
     }
 </style>

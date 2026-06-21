@@ -35,93 +35,255 @@ const { Content } = await render(service);
 ---
 
 <BaseLayout title={`${service.data.title}`} description={service.data.tagline}>
-    <div class="page-content">
-        <!-- Encabezado con datos del frontmatter -->
-        <header class="service-header">
-            <span class="service-icon">{service.data.icon}</span>
-            <div>
-                <h1>{service.data.title}</h1>
-                <p class="service-tagline">{service.data.tagline}</p>
-                <p class="service-price">
-                    Estimado desde <strong>${service.data.price} USD</strong>
+    <!-- HERO DE PÁGINA -->
+    <section class="page-hero">
+        <div class="container">
+            <a href="/services" class="back-link">← Todos los servicios</a>
+            <div class="hero-inner">
+                <span class="service-icon" aria-hidden="true">
+                    {service.data.icon}
+                </span>
+                <div>
+                    <span class="sec-subtitle">Nuestros Servicios</span>
+                    <h1>{service.data.title}</h1>
+                    <p class="service-tagline">{service.data.tagline}</p>
+                    <p class="service-price">
+                        Estimado desde
+                        <strong>${service.data.price} USD</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <section class="service-content container">
+        <div class="prose-wrapper">
+            <div class="prose">
+                <Content />
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner container">
+        <div class="cta-banner-box">
+            <div class="cta-text-cnt">
+                <h2>¿Interesado en este servicio?</h2>
+                <p>
+                    Contáctanos hoy y recibe una inspección gratuita y un
+                    presupuesto detallado en menos de 24 horas.
                 </p>
             </div>
-        </header>
-
-        <!-- Botón de llamada a la acción -->
-        <a href="/contact" class="cta-btn"> Solicitar este servicio → </a>
-
-        <!-- Cuerpo completo del archivo .md renderizado como HTML -->
-        <div class="prose">
-            <Content />
+            <div class="cta-action-cnt">
+                <a href="/contact" class="btn-white-accent">
+                    Solicitar este Servicio →
+                </a>
+            </div>
         </div>
-
-        <!-- Navegación para volver -->
-        <nav class="page-nav">
-            <a href="/services">← Todos los servicios</a>
-        </nav>
-    </div>
+    </section>
 </BaseLayout>
 
 <style>
-    .service-header {
+    /* HERO DE PÁGINA */
+    .page-hero {
+        background-color: #0f172a;
+        color: #fff;
+        padding: 80px 24px;
+    }
+
+    .back-link {
+        display: inline-block;
+        color: #94a3b8;
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-bottom: 32px;
+        transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+        color: #fff;
+    }
+
+    .hero-inner {
         display: flex;
         align-items: flex-start;
-        gap: 24px;
-        margin-bottom: 28px;
-        padding-bottom: 28px;
-        border-bottom: 3px solid #ebe5f2;
+        gap: 28px;
     }
+
     .service-icon {
-        font-size: 3.5rem;
+        font-size: 4rem;
         line-height: 1;
         flex-shrink: 0;
+        margin-top: 4px;
     }
-    .service-header h1 {
-        font-size: 2rem;
+
+    .sec-subtitle {
+        color: #395ca0;
+        font-size: 0.85rem;
         font-weight: 700;
-        color: #1a1a1a;
-        margin: 0 0 8px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        display: block;
+        margin-bottom: 12px;
     }
+
+    .page-hero h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        line-height: 1.15;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+
     .service-tagline {
-        color: #666;
-        font-size: 1rem;
-        margin: 0 0 12px;
+        font-size: 1.1rem;
+        color: #cbd5e1;
+        line-height: 1.6;
+        margin-bottom: 12px;
     }
+
     .service-price {
-        font-size: 0.9rem;
-        color: #888;
+        font-size: 0.95rem;
+        color: #94a3b8;
         margin: 0;
     }
+
     .service-price strong {
-        /* color: #7c3aed; */
-        color: #395ca0;
+        color: #93c5fd;
         font-size: 1.1rem;
     }
-    .cta-btn {
-        display: inline-block;
-        /* background-color: #7c3aed; */
-        background-color: #395ca0;
-        color: #fff;
-        padding: 12px 24px;
-        border-radius: 6px;
-        font-weight: 600;
+
+    /* CONTENIDO MARKDOWN */
+    .service-content {
+        padding: 80px 24px;
+    }
+
+    .prose-wrapper {
+        max-width: 760px;
+    }
+
+    .prose h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 40px 0 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #e2e8f0;
+    }
+
+    .prose h3 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 28px 0 12px;
+    }
+
+    .prose p {
+        font-size: 1.05rem;
+        color: #475569;
+        line-height: 1.8;
+        margin-bottom: 18px;
+    }
+
+    .prose ul,
+    .prose ol {
+        padding-left: 24px;
+        margin-bottom: 18px;
+    }
+
+    .prose li {
         font-size: 1rem;
-        margin-bottom: 48px;
-        transition: background-color 0.2s;
+        color: #475569;
+        line-height: 1.7;
+        margin-bottom: 6px;
     }
-    .cta-btn:hover {
-        /* background-color: #5b21b6; */
-        background-color: #293a8b;
+
+    .prose strong {
+        color: #0f172a;
+        font-weight: 600;
+    }
+
+    /* CTA BANNER */
+    .cta-banner {
+        padding: 80px 24px;
+    }
+
+    .cta-banner-box {
+        background-color: #395ca0;
+        border-radius: 16px;
+        padding: 48px 60px;
         color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 40px;
+        box-shadow: 0 20px 45px rgba(57, 92, 160, 0.25);
     }
-    .page-nav {
-        margin-top: 48px;
-        padding-top: 24px;
-        border-top: 2px solid #ebe5f2;
+
+    .cta-text-cnt {
+        max-width: 600px;
     }
-    .page-nav a {
-        font-size: 0.9rem;
-        font-weight: 500;
+
+    .cta-banner-box h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+        line-height: 1.2;
+    }
+
+    .cta-banner-box p {
+        font-size: 1.1rem;
+        color: #e2e8f0;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .btn-white-accent {
+        display: inline-block;
+        background-color: #fff;
+        color: #395ca0;
+        padding: 16px 32px;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 1.05rem;
+        white-space: nowrap;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        transition: all 0.25s ease;
+    }
+
+    .btn-white-accent:hover {
+        background-color: #f1f5f9;
+        color: #293a8b;
+        transform: translateY(-2px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 1024px) {
+        .cta-banner-box {
+            flex-direction: column;
+            text-align: center;
+            padding: 40px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .page-hero {
+            padding: 60px 16px;
+        }
+
+        .hero-inner {
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .page-hero h1 {
+            font-size: 2rem;
+        }
+
+        .service-content,
+        .cta-banner {
+            padding: 60px 16px;
+        }
     }
 </style>
