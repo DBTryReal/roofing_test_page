@@ -1,14 +1,15 @@
 ---
-title: "Instalación residencial completa"
-location: "Charlotte, NC"
+title: "Instalación de techo en construcción nueva"
+location: "Apex, NC"
 category: "instalacion"
-image: "../../assets/images/gallery/proyecto-6.webp"
-alt: "Techo residencial de tejas nuevas instalado en Charlotte, NC"
+image: "../../assets/images/gallery/project-6.webp"
+alt: "Techo nuevo con tejas de tres capas instalado durante construcción de vivienda en Apex, NC"
 featured: true
-date: 2024-09-15
+date: 2024-11-05
 order: 6
 ---
 
-Reemplazamos el techo completo de esta residencia de dos plantas
-usando tejas arquitectónicas de 30 años de garantía.
-El proyecto tomó 3 días y se completó sin incidentes.
+Trabajamos junto al contratista general para instalar la cubierta de una vivienda
+nueva de 3,100 pies cuadrados. Usamos tejas de tres capas (laminated shingles)
+con underlayment sintético de alta resistencia. Terminamos en el plazo acordado
+sin retrasar las etapas siguientes de construcción.

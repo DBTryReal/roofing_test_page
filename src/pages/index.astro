@@ -4,16 +4,10 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
 // 1. IMPORTACIÓN DE RECURSOS DE CONTRATACIÓN Y MULTIMEDIA (MORE/)
-import heroImg from "../assets/images/more/image1.webp";
-// import videoSrc from "../assets/images/more/video1.mp4";
-import videoSrc from "../assets/images/more/video1_horizontal.mp4";
-import aboutImg from "../assets/images/more/image2.webp";
-
-// Imágenes optimizadas para la grilla de proyectos recientes
-import proj1Img from "../assets/images/more/image8.webp";
-import proj2Img from "../assets/images/more/image9.webp";
-import proj3Img from "../assets/images/more/image12.webp";
-import proj4Img from "../assets/images/more/image15.webp";
+import heroImg from "../assets/images/image1.webp";
+// import videoSrc from "../assets/videos/video1.mp4";
+import videoSrc from "../assets/videos/video1_horizontal.mp4";
+import aboutImg from "../assets/images/image2.webp";
 
 // 2. RECUPERACIÓN DINÁMICA DE SERVICIOS (Escalabilidad y Mantenibilidad)
 const services = await getCollection("services");
@@ -21,32 +15,10 @@ const featuredServices = services
 	.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))
 	.slice(0, 4); // Mostramos solo los 4 principales en Home
 
-const recentProjects = [
-	{
-		image: proj1Img,
-		alt: "Instalación de techo residencial completada con teijas asfálticas de alta resistencia",
-		title: "Reemplazo de Techo Residencial",
-		location: "Charlotte, NC",
-	},
-	{
-		image: proj2Img,
-		alt: "Reparación completa de techumbre asfáltica bajo estándares de seguridad",
-		title: "Instalación de Tejas Asfálticas",
-		location: "Raleigh, NC",
-	},
-	{
-		image: proj3Img,
-		alt: "Estructuras de soporte y roofing estructural para naves comerciales",
-		title: "Remodelación Estructural de Techos",
-		location: "Greensboro, NC",
-	},
-	{
-		image: proj4Img,
-		alt: "Acabado final e inspección de sellos impermeables de tejas",
-		title: "Mantenimiento y Reparación de Goteras",
-		location: "Durham, NC",
-	},
-];
+const allGallery = await getCollection("gallery");
+const recentProjects = allGallery
+	.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))
+	.slice(0, 4);
 ---
 
 <BaseLayout
@@ -343,8 +315,8 @@ const recentProjects = [
 						<figure class="proj-card">
 							<div class="proj-img-box">
 								<Image
-									src={proj.image}
-									alt={proj.alt}
+									src={proj.data.image}
+									alt={proj.data.alt}
 									width={500}
 									height={380}
 									quality={85}
@@ -354,12 +326,14 @@ const recentProjects = [
 								<div class="proj-overlay">
 									<div class="overlay-details">
 										<span class="proj-location">
-											{proj.location}
+											{proj.data.location}
 										</span>
-										<h3 class="proj-title">{proj.title}</h3>
-										<p class="proj-cta-text">
+										<h3 class="proj-title">
+											{proj.data.title}
+										</h3>
+										{/* <p class="proj-cta-text">
 											Ver portafolio de fotos →
-										</p>
+										</p> */}
 									</div>
 								</div>
 							</div>

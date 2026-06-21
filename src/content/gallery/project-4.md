@@ -1,14 +1,15 @@
 ---
-title: "Techo comercial TPO"
-location: "Durham, NC"
-category: "instalacion"
-image: "../../assets/images/gallery/proyecto-4.webp"
-alt: "Techo comercial con membrana TPO instalada en Durham, NC"
+title: "Techo de metal corrugado en nave industrial"
+location: "Greensboro, NC"
+category: "comercial"
+image: "../../assets/images/gallery/project-4.webp"
+alt: "Instalación de paneles de metal corrugado galvanizado en nave industrial en Greensboro, NC"
 featured: true
 date: 2024-10-12
 order: 4
 ---
 
-Reemplazamos el techo completo de esta residencia de dos plantas
-usando tejas arquitectónicas de 30 años de garantía.
-El proyecto tomó 3 días y se completó sin incidentes.
+Instalamos paneles de acero galvanizado calibre 26 en una nave de almacenamiento
+de 8,000 pies cuadrados. El sistema de metal ofrece durabilidad de 40+ años y
+resistencia a vientos de hasta 130 mph, cumpliendo con los códigos de construcción
+del condado Guilford.

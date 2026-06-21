@@ -1,14 +1,15 @@
 ---
-title: "Reparación por granizo"
-location: "CharloRaleightte, NC"
+title: "Reparación de daños por granizo"
+location: "Raleigh, NC"
 category: "reparacion"
-image: "../../assets/images/gallery/proyecto-2.webp"
-alt: "Reparación de techo con daños por granizo en Raleigh, NC"
+image: "../../assets/images/gallery/project-2.webp"
+alt: "Tejas dañadas por granizo reparadas y reemplazadas en Raleigh, NC"
 featured: true
 date: 2024-09-22
 order: 2
 ---
 
-Reemplazamos el techo completo de esta residencia de dos plantas
-usando tejas arquitectónicas de 30 años de garantía.
-El proyecto tomó 3 días y se completó sin incidentes.
+Tras una tormenta severa, inspeccionamos y reemplazamos las tejas impactadas
+por granizo en una vivienda de un solo nivel. Coordinamos directamente con la
+aseguradora del cliente y completamos la reparación en un día sin interrumpir
+la rutina familiar.
