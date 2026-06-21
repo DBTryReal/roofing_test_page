@@ -3,8 +3,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 
 // ── Importar imágenes del directorio more/ ──
-import heroImg from "../assets/images/more/image8.webp";
-import videoSrc from "../assets/images/more/video1.mp4";
+// import heroImg from "../assets/images/more/image8.webp";
+import heroImg from "../assets/images/more/image17.webp";
+// import videoSrc from "../assets/images/more/video1.mp4";
+import videoSrc from "../assets/images/more/video1_horizontal.mp4";
 import aboutImg from "../assets/images/more/image10.webp";
 import serviceRoofing from "../assets/images/more/image11.webp";
 import serviceMaterials from "../assets/images/more/image12.webp";
@@ -43,8 +45,7 @@ import teamImg from "../assets/images/more/image4.webp";
             poster={heroImg.src}
             aria-hidden="true"
         >
-            <!-- <source src="/videos/video1.mp4" type="video/mp4" /> -->
-            <source src={videoSrc} type="video/mp4" />
+            <!-- <source src={videoSrc} type="video/mp4" /> -->
         </video>
         <div class="hero__overlay" aria-hidden="true"></div>
 
@@ -719,7 +720,10 @@ import teamImg from "../assets/images/more/image4.webp";
         /* ═══════ HERO ═══════ */
         .hero {
             position: relative;
-            min-height: 100vh;
+            /* min-height: 100vh; */
+            /* min-height: 65vh; */
+            width: 100%;
+            height: 85vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -731,7 +735,12 @@ import teamImg from "../assets/images/more/image4.webp";
             inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            /* width: 100vh;
+            height: 100vw; */
+            /* width: 100vw;
+            height: 100vh; */
+            /* object-fit: cover; */
+            object-fit: contain;
             z-index: 0;
         }
         .hero__overlay {
@@ -1379,15 +1388,15 @@ import teamImg from "../assets/images/more/image4.webp";
                 fadeObserver.observe(section);
             });
 
-        const video = document.getElementById(
-            "video1",
-        ) as HTMLVideoElement | null;
+        // const video = document.getElementById(
+        //     "video1",
+        // ) as HTMLVideoElement | null;
 
-        if (video) {
-            video.addEventListener("loadedmetadata", () => {
-                video.playbackRate = 0.45;
-            });
-        }
+        // if (video) {
+        //     video.addEventListener("loadedmetadata", () => {
+        //         video.playbackRate = 0.4;
+        //     });
+        // }
     </script>
 
     <style is:global>
