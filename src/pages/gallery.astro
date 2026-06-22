@@ -278,8 +278,8 @@ const categories = [...new Set(projects.map((p) => p.data.category))];
           presupuesto detallado en menos de 24 horas.
         </p>
       </div>
-      <div class="cta-action-cnt">
-        <a href="/contact" class="btn-white-accent">
+      <div class="cta-action-cnt">                
+        <a href={`${import.meta.env.BASE_URL}contact`} class="btn-white-accent">
           Solicitar Cotización Gratis →
         </a>
       </div>

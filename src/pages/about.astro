@@ -87,7 +87,10 @@ const { Content } = await render(about);
                 </p>
             </div>
             <div class="cta-action-cnt">
-                <a href="/contact" class="btn-white-accent">
+                <a
+                    href={`${import.meta.env.BASE_URL}contact`}
+                    class="btn-white-accent"
+                >
                     Agendar Mi Inspección Gratis
                 </a>
             </div>
