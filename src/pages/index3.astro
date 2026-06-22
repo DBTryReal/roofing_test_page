@@ -61,14 +61,14 @@ import teamImg from "../assets/images/image4.webp";
             </p>
             <div class="hero__cta-group">
                 <a
-                    href="/contact"
+                    href={`${import.meta.env.BASE_URL}contact`}
                     class="btn btn--primary"
                     id="hero-cta-contact"
                 >
                     Get a Free Estimate
                 </a>
                 <a
-                    href="/services"
+                    href={`${import.meta.env.BASE_URL}services`}
                     class="btn btn--outline"
                     id="hero-cta-services"
                 >
@@ -117,7 +117,11 @@ import teamImg from "../assets/images/image4.webp";
                     challenges and building codes. Every project is completed on
                     time, within budget, and backed by our quality guarantee.
                 </p>
-                <a href="/about" class="btn btn--secondary" id="about-cta">
+                <a
+                    href={`${import.meta.env.BASE_URL}about`}
+                    class="btn btn--secondary"
+                    id="about-cta"
+                >
                     Learn More About Us →
                 </a>
             </div>
@@ -165,7 +169,7 @@ import teamImg from "../assets/images/image4.webp";
                             metal, and flat roofing systems.
                         </p>
                         <a
-                            href="/services/roofing-repair"
+                            href={`${import.meta.env.BASE_URL}services/reparacion-goteras`}
                             class="service-item__link"
                         >
                             Learn More →
@@ -194,7 +198,10 @@ import teamImg from "../assets/images/image4.webp";
                             Custom-built decks, screen porches, and covered
                             patios designed for NC weather.
                         </p>
-                        <a href="/services" class="service-item__link">
+                        <a
+                            href={`${import.meta.env.BASE_URL}services/instalacion-residencial`}
+                            class="service-item__link"
+                        >
                             Learn More →
                         </a>
                     </div>
@@ -221,7 +228,10 @@ import teamImg from "../assets/images/image4.webp";
                             Storage buildings, workshops, and utility structures
                             built to last.
                         </p>
-                        <a href="/services" class="service-item__link">
+                        <a
+                            href={`${import.meta.env.BASE_URL}services/techos-de-metal`}
+                            class="service-item__link"
+                        >
                             Learn More →
                         </a>
                     </div>
@@ -248,7 +258,10 @@ import teamImg from "../assets/images/image4.webp";
                             Ground-up residential builds and major renovations
                             with full project management.
                         </p>
-                        <a href="/services" class="service-item__link">
+                        <a
+                            href={`${import.meta.env.BASE_URL}services/techado-comercial`}
+                            class="service-item__link"
+                        >
                             Learn More →
                         </a>
                     </div>
@@ -356,7 +369,11 @@ import teamImg from "../assets/images/image4.webp";
             </div>
 
             <div class="gallery__cta">
-                <a href="/gallery" class="btn btn--secondary" id="gallery-cta">
+                <a
+                    href={`${import.meta.env.BASE_URL}gallery`}
+                    class="btn btn--secondary"
+                    id="gallery-cta"
+                >
                     View All Projects →
                 </a>
             </div>
@@ -582,7 +599,7 @@ import teamImg from "../assets/images/image4.webp";
             </p>
             <div class="cta-final__actions">
                 <a
-                    href="/contact"
+                    href={`${import.meta.env.BASE_URL}contact`}
                     class="btn btn--primary btn--large"
                     id="cta-final-contact"
                 >
