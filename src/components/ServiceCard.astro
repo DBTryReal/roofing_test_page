@@ -19,7 +19,7 @@ const { service } = Astro.props;
         <div class="card-footer">
             <span class="service-badge-tag">Garantizado</span>
             <a
-                href={`/services/${service.id}`}
+                href={`${import.meta.env.BASE_URL}services/${service.id}`}
                 class="text-link"
                 aria-label={`Saber más sobre ${service.data.title}`}
             >
