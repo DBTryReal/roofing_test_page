@@ -18,7 +18,7 @@ Instalamos techos completos en viviendas nuevas y en sustitución de techumbres 
 - Colocación de tejas asfálticas de alta resistencia (30 años)
 - Sellado de bordes, canaletas y chimeneas
 - Limpieza completa del área de trabajo
-- Garantía escrita de mano de obra (5+ años)
+- Garantía escrita de mano de obra (5 años)
 
 ## Proceso de trabajo
 
