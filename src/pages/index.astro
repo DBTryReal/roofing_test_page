@@ -126,7 +126,7 @@ const recentProjects = allGallery
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
-							d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0yz"
+							d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
 						></path>
 					</svg>
 				</div>
@@ -1122,6 +1122,155 @@ const recentProjects = allGallery
 		.workflow-section,
 		.cta-banner {
 			padding: 60px 16px;
+		}
+	}
+
+	/* ============================================================
+   DARK MODE — index.astro
+   ============================================================ */
+	@media (prefers-color-scheme: dark) {
+		/* ---- Reutilizables de sección ---- */
+		.section-header-cnt h2 {
+			color: #f1f5f9;
+		}
+		.section-desc {
+			color: #94a3b8;
+		}
+		.sec-subtitle {
+			color: #60a5fa;
+		}
+
+		/* ---- Trust Banner ---- */
+		.trust-banner {
+			background-color: #1e293b;
+			border-bottom-color: rgba(255, 255, 255, 0.06);
+		}
+		.trust-item h3 {
+			color: #f1f5f9;
+		}
+		.trust-item p {
+			color: #94a3b8;
+		}
+		.icon-wrap {
+			background-color: rgba(96, 165, 250, 0.1);
+			color: #60a5fa;
+		}
+
+		/* ---- Servicios ---- */
+		.service-teaser-card {
+			background-color: #1e293b;
+			border-color: rgba(255, 255, 255, 0.08);
+		}
+		.service-teaser-card:hover {
+			border-color: rgba(96, 165, 250, 0.3);
+			box-shadow:
+				0 20px 25px -5px rgba(0, 0, 0, 0.4),
+				0 10px 10px -5px rgba(0, 0, 0, 0.2);
+		}
+		.service-body h3 {
+			color: #f1f5f9;
+		}
+		.service-body p {
+			color: #94a3b8;
+		}
+		.card-footer {
+			border-top-color: rgba(255, 255, 255, 0.08);
+		}
+		.service-badge-tag {
+			background-color: rgba(74, 222, 128, 0.1);
+			color: #4ade80;
+		}
+		.text-link {
+			color: #60a5fa;
+		}
+		.text-link:hover {
+			color: #93c5fd;
+		}
+
+		/* ---- About Highlight ---- */
+		.about-highlight {
+			background-color: #1e293b;
+			border-top-color: rgba(255, 255, 255, 0.08);
+			border-bottom-color: rgba(255, 255, 255, 0.08);
+		}
+		.about-text h2 {
+			color: #f1f5f9;
+		}
+		.about-text p {
+			color: #94a3b8;
+		}
+		.bullets-check li {
+			color: #cbd5e1;
+		}
+		.check-svg {
+			color: #60a5fa;
+		}
+		.about-media img {
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+		}
+		.badge-stat {
+			background-color: #0f172a;
+			border-left-color: #60a5fa;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+		}
+		.stat-number {
+			color: #60a5fa;
+		}
+		.stat-text {
+			color: #94a3b8;
+		}
+		.btn-primary.alt-btn {
+			color: #60a5fa;
+			border-color: #60a5fa;
+		}
+		.btn-primary.alt-btn:hover {
+			background-color: #60a5fa;
+			color: #0f172a;
+		}
+
+		/* ---- Galería ---- */
+		.proj-card {
+			background-color: #1e293b;
+		}
+		.proj-card-wrap:hover .p-img {
+			/* El efecto de escala ya funciona, no hay cambio */
+		}
+
+		/* ---- Workflow (ya es oscuro por defecto, solo ajuste sutil) ---- */
+		.workflow-section {
+			/* background ya es #0f172a — se mantiene */
+		}
+		.step-card {
+			border-color: rgba(255, 255, 255, 0.06);
+		}
+
+		/* ---- CTA Banner (ya es azul oscuro — se mantiene) ---- */
+		.btn-white-accent {
+			background-color: #1e293b;
+			color: #60a5fa;
+			border: 2px solid #60a5fa;
+		}
+		.btn-white-accent:hover {
+			background-color: #60a5fa;
+			color: #0f172a;
+		}
+
+		/* ---- Botones globales en contexto dark ---- */
+		.btn-primary {
+			background-color: #4a7fd4;
+			border-color: #4a7fd4;
+		}
+		.btn-primary:hover {
+			background-color: #3b6cbf;
+			border-color: #3b6cbf;
+		}
+		.btn-secondary {
+			color: #60a5fa;
+			border-color: #60a5fa;
+		}
+		.btn-secondary:hover {
+			background-color: #60a5fa;
+			color: #0f172a;
 		}
 	}
 </style>

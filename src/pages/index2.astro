@@ -1208,6 +1208,87 @@ import teamImg from "../assets/images/image4.webp";
             flex-wrap: wrap;
         }
 
+        /* ============================================================
+   DARK MODE — index2.astro
+   ============================================================ */
+        @media (prefers-color-scheme: dark) {
+            /* ---- Re-tokenización ---- */
+            :root {
+                --color-primary: #4a7fd4;
+                --color-primary-light: #60a5fa;
+                --color-bg: #0f172a;
+                --color-bg-alt: #1e293b;
+                --color-text: #e2e8f0;
+                --color-text-light: #94a3b8;
+                /* --color-dark se mantiene en #1a1a2e para no romper el CTA gradient */
+                --color-border: rgba(255, 255, 255, 0.08);
+                --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+                --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6);
+                --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.7);
+            }
+
+            /* ---- Headings que usan --color-dark (texto) ---- */
+            /* --color-dark no se pudo cambiar arriba sin romper el CTA bg,
+       así que se sobreescribe manualmente en los selectores de texto */
+            .section-title,
+            .service-item__title,
+            .process__step-title,
+            .testimonial__name {
+                color: #f1f5f9;
+            }
+
+            /* ---- Cards con bg hardcodeado #fff ---- */
+            .service-item {
+                background: #1e293b;
+            }
+            .service-item:hover {
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            }
+
+            .testimonial {
+                background: #1e293b;
+            }
+
+            /* ---- About accent border ---- */
+            .about__image-accent {
+                border-color: var(--color-primary-light);
+            }
+
+            /* ---- Process connector (re-colorear para dark bg-alt) ---- */
+            .process__connector {
+                background: linear-gradient(
+                    to bottom,
+                    var(--color-primary-light),
+                    transparent
+                );
+            }
+
+            /* ---- Btn outline (en hero sobre overlay oscuro — se mantiene blanco) ---- */
+            /* .btn--outline ya usa color:#fff y border rgba(255,255,255,0.5) — OK en dark */
+
+            /* ---- Btn secondary (sobre bg oscuro) ---- */
+            .btn--secondary {
+                color: var(--color-primary-light);
+                border-color: var(--color-primary-light);
+            }
+            .btn--secondary:hover {
+                background: var(--color-primary-light);
+                color: #0f172a;
+            }
+        }
+
+        /* Process connector horizontal en tablet+ */
+        @media (prefers-color-scheme: dark) and (min-width: 768px) {
+            .process__connector {
+                background: linear-gradient(
+                    to right,
+                    var(--color-primary-light),
+                    transparent
+                );
+            }
+        }
+
         /* ═══════ ANIMATIONS ═══════ */
         @keyframes fadeInDown {
             from {

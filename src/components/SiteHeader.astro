@@ -214,6 +214,37 @@ import logoDark from "../assets/logo-dark.webp";
             pointer-events: auto;
         }
     }
+
+    /* ============================================================
+   DARK MODE — SiteHeader
+   ============================================================ */
+    @media (prefers-color-scheme: dark) {
+        .hamburger-line {
+            background-color: #94a3b8;
+        }
+
+        .nav-toggle:hover {
+            background-color: #1e293b;
+        }
+    }
+
+    /* Mobile panel en dark mode */
+    @media (prefers-color-scheme: dark) and (max-width: 768px) {
+        .site-nav {
+            background-color: #0f172a;
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .site-nav a {
+            border-bottom-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .site-nav a:hover {
+            background-color: #1e293b;
+            color: #60a5fa;
+        }
+    }
 </style>
 
 <script>
