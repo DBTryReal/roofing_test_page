@@ -2,14 +2,10 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 
-// ── Importar imágenes del directorio more/ ──
-// import heroImg from "../assets/images/image8.webp";
+// ── Importar imágenes/ ──
 import heroImg from "../assets/images/image17.webp";
-// import videoSrc from "../assets/videos/video1.mp4";
-// import videoSrc from "../assets/videos/video1_horizontal.mp4";
 import aboutImg from "../assets/images/image10.webp";
 import serviceRoofing from "../assets/images/image11.webp";
-// import serviceMaterials from "../assets/images/image12.webp";
 import serviceBuildings from "../assets/images/image15.webp";
 import serviceConstruction from "../assets/images/image13.webp";
 import galleryPorch from "../assets/images/image16.webp";
@@ -26,27 +22,21 @@ import teamImg from "../assets/images/image4.webp";
 >
     <!-- ═══════════════════════════════════════════════════════════════
 	     SECTION 1 — HERO
-	     Video de fondo con overlay oscuro, título, subtítulo y CTA
+	     Image background with overlay, title, subtitle and CTA
 	     ═══════════════════════════════════════════════════════════════ -->
     <section
         class="hero"
         id="hero"
         aria-label="Welcome to Carolina Prime Construction & Remodeling LLC"
     >
-        <!-- Video Background -->
-        <video
-            id="video1"
-            class="hero__video"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            poster={heroImg.src}
-            aria-hidden="true"
-        >
-            <!-- <source src={videoSrc} type="video/mp4" /> -->
-        </video>
+        <Image
+            src={heroImg}
+            alt="Expert roofing installation by Carolina Prime Construction & Remodeling in North Carolina"
+            class="hero__image"
+            loading="eager"
+            fetchpriority="high"
+        />
+
         <div class="hero__overlay" aria-hidden="true"></div>
 
         <div class="hero__content container">
@@ -738,27 +728,20 @@ import teamImg from "../assets/images/image4.webp";
         /* ═══════ HERO ═══════ */
         .hero {
             position: relative;
-            /* min-height: 100vh; */
-            /* min-height: 65vh; */
             width: 100%;
-            height: 85vh;
+            height: 75vh;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             background: var(--color-dark);
         }
-        .hero__video {
+        .hero__image {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
-            /* width: 100vh;
-            height: 100vw; */
-            /* width: 100vw;
-            height: 100vh; */
-            /* object-fit: cover; */
-            object-fit: contain;
+            object-fit: cover;
             z-index: 0;
         }
         .hero__overlay {
@@ -1486,16 +1469,6 @@ import teamImg from "../assets/images/image4.webp";
                 section.classList.add("fade-section");
                 fadeObserver.observe(section);
             });
-
-        // const video = document.getElementById(
-        //     "video1",
-        // ) as HTMLVideoElement | null;
-
-        // if (video) {
-        //     video.addEventListener("loadedmetadata", () => {
-        //         video.playbackRate = 0.4;
-        //     });
-        // }
     </script>
 
     <style is:global>
