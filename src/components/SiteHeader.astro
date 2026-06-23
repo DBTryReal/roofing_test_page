@@ -1,0 +1,259 @@
+---
+import { Image } from "astro:assets";
+import logoLight from "../assets/logo-light.webp";
+import logoDark from "../assets/logo-dark.webp";
+---
+
+<header class="site-header">
+    <div class="container">
+        <a
+            href={`${import.meta.env.BASE_URL}`}
+            class="logo-link"
+            aria-label="Carolina Prime Construction & Remodeling LLC - Ir al inicio"
+        >
+            <Image
+                src={logoLight}
+                alt="Carolina Prime Construction & Remodeling LLC"
+                width={120}
+                height={100}
+                class="logo-theme-light"
+                loading="eager"
+                decoding="async"
+            />
+
+            <Image
+                src={logoDark}
+                alt="Carolina Prime Construction & Remodeling LLC Logo"
+                width={120}
+                height={100}
+                loading="eager"
+                decoding="async"
+                class="logo-theme-dark"
+            />
+        </a>
+
+        <button
+            class="nav-toggle"
+            id="nav-toggle"
+            aria-expanded="false"
+            aria-controls="site-nav"
+            aria-label="Abrir menú de navegación"
+        >
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+
+        <nav
+            class="site-nav"
+            id="site-nav"
+            aria-label="Menú de navegación principal"
+        >
+            <a href={`${import.meta.env.BASE_URL}`}>Home</a>
+            <a href={`${import.meta.env.BASE_URL}index2`}>Home2</a>
+            <a href={`${import.meta.env.BASE_URL}services`}>Services</a>
+            <a href={`${import.meta.env.BASE_URL}gallery`}>Gallery</a>
+            <a href={`${import.meta.env.BASE_URL}about`}>About</a>
+            <a href={`${import.meta.env.BASE_URL}contact`}>Contact</a>
+        </nav>
+    </div>
+
+    <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+</header>
+
+<style>
+    /* ============================================================
+       LOGO
+       ============================================================ */
+    .logo-link {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        border-bottom: none;
+    }
+
+    .logo-img {
+        height: 48px;
+        width: auto;
+    }
+
+    /* Por defecto: modo claro activo, modo oscuro oculto */
+    .logo-theme-dark {
+        display: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .logo-theme-light {
+            display: none;
+        }
+        .logo-theme-dark {
+            display: block;
+        }
+    }
+
+    /* ============================================================
+       BOTÓN HAMBURGER — oculto en desktop
+       ============================================================ */
+    .nav-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: background-color 0.2s ease;
+        /* sobre el panel del nav para que el X sea clicable */
+        position: relative;
+        z-index: 201;
+    }
+
+    .nav-toggle:hover {
+        background-color: #f1f5f9;
+    }
+
+    .hamburger-line {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background-color: #334155;
+        border-radius: 2px;
+        transform-origin: center;
+        transition:
+            transform 0.3s ease,
+            opacity 0.3s ease,
+            width 0.3s ease;
+    }
+
+    /* Animación a X cuando aria-expanded="true" */
+    .nav-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    .nav-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
+        opacity: 0;
+        width: 0;
+    }
+    .nav-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ============================================================
+       OVERLAY — solo existe en mobile
+       ============================================================ */
+    .nav-overlay {
+        display: none;
+    }
+
+    /* ============================================================
+       MOBILE (≤ 768px)
+       ============================================================ */
+    /* @media (max-width: 768px) { */
+    @media (max-width: 600px) {
+        /* Muestra el botón hamburger */
+        .nav-toggle {
+            display: flex;
+        }
+
+        /* Panel lateral que desliza desde la derecha */
+        .site-nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100dvh;
+            width: min(280px, 80vw);
+            background-color: #fff;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0;
+            padding: 80px 0 32px;
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 200;
+            overflow-y: auto;
+        }
+
+        .site-nav.is-open {
+            transform: translateX(0);
+        }
+
+        .site-nav a {
+            width: 100%;
+            padding: 14px 28px;
+            font-size: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            /* Elimina el subrayado-borde de desktop */
+            border-bottom-color: #f1f5f9;
+        }
+
+        .site-nav a:hover {
+            background-color: #f8fafc;
+            color: #395ca0;
+            border-bottom-color: #f1f5f9;
+        }
+
+        /* Fondo semitransparente detrás del panel */
+        .nav-overlay {
+            display: block;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(2px);
+            z-index: 199;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-overlay.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    }
+</style>
+
+<script>
+    const toggle = document.getElementById("nav-toggle");
+    const nav = document.getElementById("site-nav");
+    const overlay = document.getElementById("nav-overlay");
+
+    function openMenu() {
+        nav?.classList.add("is-open");
+        overlay?.classList.add("is-visible");
+        toggle?.setAttribute("aria-expanded", "true");
+        toggle?.setAttribute("aria-label", "Cerrar menú de navegación");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeMenu() {
+        nav?.classList.remove("is-open");
+        overlay?.classList.remove("is-visible");
+        toggle?.setAttribute("aria-expanded", "false");
+        toggle?.setAttribute("aria-label", "Abrir menú de navegación");
+        document.body.style.overflow = "";
+    }
+
+    toggle?.addEventListener("click", () => {
+        nav?.classList.contains("is-open") ? closeMenu() : openMenu();
+    });
+
+    // Cierra al hacer clic en el overlay
+    overlay?.addEventListener("click", closeMenu);
+
+    // Cierra con la tecla Escape y devuelve el foco al botón
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && nav?.classList.contains("is-open")) {
+            closeMenu();
+            toggle?.focus();
+        }
+    });
+
+    // Cierra al navegar desde mobile (clic en enlace)
+    nav?.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+    });
+</script>
