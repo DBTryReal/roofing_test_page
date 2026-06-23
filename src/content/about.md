@@ -1,6 +1,6 @@
 ---
 title: "Sobre Nosotros"
-description: "Somos Carolina Prime Construction, expertos en roofing residencial y comercial en Carolina del Norte desde 2015."
+description: "Somos Carolina Prime Construction & Remodeling LLC, expertos en roofing residencial y comercial en Carolina del Norte desde 2015."
 founding_year: 2015
 team_size: 15
 location: "Charlotte, NC"
@@ -8,7 +8,7 @@ location: "Charlotte, NC"
 
 ## Nuestra Historia
 
-Carolina Prime Construction nació en 2015 con un único propósito: brindar a los propietarios de Carolina del Norte un servicio de techado que combina materiales premium, mano de obra certificada y atención personalizada.
+Carolina Prime Construction & Remodeling LLC nació en 2015 con un único propósito: brindar a los propietarios de Carolina del Norte un servicio de techado que combina materiales premium, mano de obra certificada y atención personalizada.
 
 Desde nuestros primeros proyectos en Charlotte, hemos crecido hasta convertirnos en una de las empresas de roofing de mayor confianza en la región, completando más de 500 proyectos residenciales y comerciales en toda el área metropolitana.
 
