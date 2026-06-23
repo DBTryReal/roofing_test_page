@@ -189,6 +189,26 @@ a:hover {
     margin-top: auto;
 }
 
+
+/* others */
+.btn-white-accent {
+    background-color: #fff;
+    color: #395ca0;
+    padding: 16px 32px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    border-radius: 6px;
+    display: inline-block;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease;
+}
+
+.btn-white-accent:hover {
+    background-color: #f1f5f9;
+    color: #293a8b;
+    transform: translateY(-2px);
+}
+
 /* ============================================================
    DARK MODE — Global shell (body, header, footer, prose)
    ============================================================ */
@@ -248,5 +268,28 @@ a:hover {
         background-color: #1e293b;
         color: #94a3b8;
         border-left-color: #60a5fa;
+    }
+
+    /* others */
+    .btn-white-accent {
+        /* background-color: #fff;
+        color: #395ca0; */
+        background-color: #4a7fd4;
+        color: #f1f5f9;
+        padding: 16px 32px;
+        font-weight: 700;
+        font-size: 1.05rem;
+        border-radius: 6px;
+        display: inline-block;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        transition: all 0.25s ease;
+    }
+
+    .btn-white-accent:hover {
+        /* background-color: #f1f5f9;
+        color: #293a8b; */
+        background-color: #3b6cbf;
+        color: #e3effb;
+        transform: translateY(-2px);
     }
 }
