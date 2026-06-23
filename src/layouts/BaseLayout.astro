@@ -1,11 +1,11 @@
 ---
-// import { Image } from "astro:assets";
-// // for light mode
-// import logoLight from "../assets/logo-light.webp";
-// // import logoLightBackground from "../assets/logo-light-background.webp";
-// // for dark mode
-// import logoDark from "../assets/logo-dark.webp";
-// // import logoDarkBackground from "../assets/logo-dark-background.webp";
+import { Image } from "astro:assets";
+// for light mode
+import logoLight from "../assets/logo-light.webp";
+// import logoLightBackground from "../assets/logo-light-background.webp";
+// for dark mode
+import logoDark from "../assets/logo-dark.webp";
+// import logoDarkBackground from "../assets/logo-dark-background.webp";
 
 // Recibe opcionalmente un título y descripción para el <head>
 interface Props {
@@ -85,6 +85,32 @@ const {
                     /> -->
                 <!-- </a> -->
 
+                <a
+                    href={`${import.meta.env.BASE_URL}`}
+                    class="logo-link"
+                    aria-label="Carolina Prime Construction & Remodeling LLC - Ir al inicio"
+                >
+                    <Image
+                        src={logoLight}
+                        alt="Carolina Prime Construction & Remodeling LLC"
+                        width={120}
+                        height={100}
+                        class="logo-theme-light"
+                        loading="eager"
+                        decoding="async"
+                    />
+
+                    <Image
+                        src={logoDark}
+                        alt="Carolina Prime Construction & Remodeling LLC Logo"
+                        width={120}
+                        height={100}
+                        loading="eager"
+                        decoding="async"
+                        class="logo-theme-dark"
+                    />
+                </a>
+
                 <nav class="site-nav">
                     <a href={`${import.meta.env.BASE_URL}`}>Home</a>
                     <a href={`${import.meta.env.BASE_URL}index2`}>Home2</a>
@@ -134,26 +160,26 @@ const {
     /* min-height: 100vh; */
     /* Elimina márgenes por defecto */
     /* margin: 0;
-    }
+    } */
 
     header {
-        background-color: #f9f6fc;
+        /* background-color: #f9f6fc;
         padding: 0px 20px;
         display: flex;
         align-items: center;
         justify-content: space-between; */
 
-    /* Estilos para el contenedor del logo y texto */
-    /* .logo-link {
+        /* Estilos para el contenedor del logo y texto */
+        .logo-link {
             display: flex;
             align-items: center;
             gap: 12px;
-            text-decoration: none; */
-    /* Quitamos la línea punteada heredada */
-    /* border-bottom: none;
+            text-decoration: none;
+            /* Quitamos la línea punteada heredada */
+            border-bottom: none;
         }
 
-        h1 {
+        /* h1 {
             margin: 0;
         }
 
@@ -166,8 +192,8 @@ const {
         a {
             text-decoration: none;
             border-bottom: 1px dashed;
-        }
-    } */
+        } */
+    }
 
     /* main { */
     /* Hace que el main ocupe el espacio restante */
@@ -175,33 +201,33 @@ const {
     } */
 
     /* Por defecto, mostramos la versión clara y ocultamos la oscura */
-    /* .logo-theme-dark {
+    .logo-theme-dark {
         display: none !important;
     }
     .logo-theme-light {
         display: block !important;
-    } */
+    }
 
     /* Cuando el sistema del visitante está en modo oscuro (o si cambias el header a negro) */
-    /* @media (prefers-color-scheme: dark) {
+    @media (prefers-color-scheme: dark) {
         .logo-theme-light {
             display: none !important;
         }
         .logo-theme-dark {
             display: block !important;
-        } */
-
-    /* Opcional: Ajusta el color del menú para que contraste en fondo oscuro */
-    /* header { */
-    /* Fondo gris oscuro/negro */
-    /* background-color: #2e2e2e !important;
-        } */
-
-    /* header nav a { */
-    /* Texto de enlaces en blanco */
-    /* color: #fff !important;
         }
-    } */
+
+        /* Opcional: Ajusta el color del menú para que contraste en fondo oscuro */
+        header {
+            /* Fondo gris oscuro/negro */
+            background-color: #2e2e2e !important;
+        }
+
+        header nav a {
+            /* Texto de enlaces en blanco */
+            color: #fff !important;
+        }
+    }
 
     /* footer {
         background-color: #f9f6fc;
