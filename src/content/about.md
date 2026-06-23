@@ -1,32 +1,32 @@
 ---
-title: "Sobre Nosotros"
-description: "Somos Carolina Prime Construction & Remodeling LLC, expertos en roofing residencial y comercial en Carolina del Norte desde 2015."
+title: "About Us"
+description: "We are Carolina Prime Construction & Remodeling LLC, experts in residential and commercial roofing across North Carolina since 2015."
 founding_year: 2015
 team_size: 15
-location: "Charlotte, NC"
+location: "Wilmington, NC"
 ---
 
-## Nuestra Historia
+## Our Story
 
-Carolina Prime Construction & Remodeling LLC nació en 2015 con un único propósito: brindar a los propietarios de Carolina del Norte un servicio de techado que combina materiales premium, mano de obra certificada y atención personalizada.
+Carolina Prime Construction & Remodeling LLC was founded in 2015 with a single mission: to provide North Carolina property owners with roofing services that combine premium materials, certified craftsmanship, and personalized customer care.
 
-Desde nuestros primeros proyectos en Charlotte, hemos crecido hasta convertirnos en una de las empresas de roofing de mayor confianza en la región, completando más de 500 proyectos residenciales y comerciales en toda el área metropolitana.
+Starting with our first projects in Wilmington, we have grown into one of the region’s most trusted roofing companies, completing more than 500 residential and commercial projects throughout the metropolitan area.
 
-## Lo Que Nos Diferencia
+## What Sets Us Apart
 
-No somos una empresa más de techado. Somos vecinos comprometidos con la comunidad que construimos y protegemos cada día.
+We are more than just another roofing company. We are community-focused professionals committed to building and protecting the neighborhoods we serve every day.
 
-- **Transparencia total**: Cada cotización es detallada y sin cargos ocultos.
-- **Materiales certificados**: Trabajamos exclusivamente con shingles asfálticos, metal y materiales estructurales de primera línea.
-- **Garantía por escrito**: Nuestros trabajos incluyen garantía de mano de obra y de materiales.
-- **Licencia y seguro**: Operamos completamente licenciados y asegurados en Carolina del Norte.
+- **Complete Transparency:** Every estimate is detailed and free of hidden fees.
+- **Certified Materials:** We work exclusively with high-quality asphalt shingles, metal roofing systems, and premium structural materials.
+- **Written Warranty:** Our projects are backed by both workmanship and material warranties.
+- **Licensed and Insured:** We operate fully licensed and insured throughout North Carolina.
 
-## Nuestro Equipo
+## Our Team
 
-Contamos con más de 15 profesionales especializados: ingenieros de techumbre, instaladores certificados e inspectores de calidad. Cada miembro ha sido capacitado bajo los estándares más exigentes de la industria.
+Our team includes more than 15 specialized professionals, including roofing engineers, certified installers, and quality control inspectors. Every team member is trained according to the highest standards in the industry.
 
-Creemos que un buen techo es sinónimo de un hogar seguro. Por eso, en cada proyecto volcamos nuestra experiencia, precisión y cuidado para que el resultado final supere tus expectativas.
+We believe that a quality roof is the foundation of a safe home. That’s why we bring our expertise, precision, and attention to detail to every project, ensuring results that exceed expectations.
 
-## Nuestra Promesa
+## Our Promise
 
-Trabajamos con integridad. Desde la primera inspección gratuita hasta la entrega final, te mantenemos informado en cada paso del proceso. No descansamos hasta que estés completamente satisfecho con el resultado.
+We work with integrity. From the initial free inspection to the final project completion, we keep you informed every step of the way. We are committed to delivering exceptional results and won’t consider the job finished until you are completely satisfied.
