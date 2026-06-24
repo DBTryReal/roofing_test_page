@@ -48,7 +48,7 @@ const gallery = defineCollection({
         z.object({
             title: z.string(),
             location: z.string(),
-            category: z.enum(["instalacion", "reparacion", "mantenimiento", "comercial"]),
+            category: z.enum(["installation", "repair", "maintenance", "commercial"]),
             // image() en lugar de z.string() activa la optimización de Astro:
             // resuelve la ruta relativa, verifica que el archivo existe,
             // y provee metadata (width, height) para <Image>

@@ -4,27 +4,27 @@
 // import BaseLayout from "../layouts/BaseLayout.astro";
 
 //
-// CONCEPTO CLAVE:
-// getEntry("pages", "about") carga UN SOLO archivo de la colección.
-// El primer argumento es el nombre de la colección.
-// El segundo argumento es el ID del archivo (nombre sin extensión).
-// "about" corresponde a src/content/about.md
+// CORE CONCEPT:
+// getEntry("pages", "about") loads A SINGLE file from the collection.
+// The first argument is the collection name.
+// The second argument is the file ID (name without extension).
+// "about" corresponds to src/content/about.md
 //
-// render(about) convierte el markdown en un componente <Content />
-// que luego usamos en el template como si fuera cualquier componente Astro.
+// render(about) converts the markdown into a <Content /> component
+// that we then use in the template like any other Astro component.
 
-// way 2: multiple files or one if not mare than 1
+// way 2: multiple files or one if not more than 1
 import { getEntry, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-// Carga específicamente el archivo "about.md" de la colección "pages"
+// Loads specifically the "about.md" file from the "pages" collection
 const about = await getEntry("pages", "about");
 if (!about) {
     throw new Error(
-        'No se encontró la entrada "about" en la colección "pages".',
+        'Could not find the "about" entry in the "pages" collection.',
     );
 }
-// Convierte el markdown en un componente HTML
+// Renders the markdown as an HTML component
 const { Content } = await render(about);
 ---
 
@@ -34,22 +34,22 @@ const { Content } = await render(about);
     <p class="description">{frontmatter.description}</p> -->
 
     <!-- ============================================================
-         CABECERA DE PÁGINA
+         PAGE HEADER
          ============================================================ -->
     <section class="page-hero">
         <div class="container">
-            <span class="sec-subtitle">Nuestra Empresa</span>
+            <span class="sec-subtitle">Our Company</span>
             <h1>{about.data.title}</h1>
             <p class="page-desc">{about.data.description}</p>
             {
                 about.data.founding_year && (
                     <div class="about-meta">
                         <span class="meta-item">
-                            📅 Fundados en {about.data.founding_year}
+                            📅 Founded in {about.data.founding_year}
                         </span>
                         {about.data.team_size && (
                             <span class="meta-item">
-                                👥 {about.data.team_size}+ profesionales
+                                👥 {about.data.team_size}+ professionals
                             </span>
                         )}
                         {about.data.location && (
@@ -64,7 +64,7 @@ const { Content } = await render(about);
     </section>
 
     <!-- ============================================================
-         CONTENIDO MARKDOWN
+         MARKDOWN CONTENT
          ============================================================ -->
     <section class="about-body">
         <div class="container">
@@ -75,15 +75,15 @@ const { Content } = await render(about);
     </section>
 
     <!-- ============================================================
-         CTA BANNER FINAL
+         FINAL CTA BANNER
          ============================================================ -->
     <section class="cta-banner container">
         <div class="cta-banner-box">
             <div class="cta-text-cnt">
-                <h2>¿Listo para proteger tu hogar o negocio?</h2>
+                <h2>Ready to protect your home or business?</h2>
                 <p>
-                    Solicita una inspección gratuita sin compromiso. Te
-                    respondemos en menos de 24 horas.
+                    Request a no-obligation free inspection. We'll get back to
+                    you in less than 24 hours.
                 </p>
             </div>
             <div class="cta-action-cnt">
@@ -91,111 +91,110 @@ const { Content } = await render(about);
                     href={`${import.meta.env.BASE_URL}contact`}
                     class="btn-white-accent"
                 >
-                    Agendar Mi Inspección Gratis
+                    Schedule My Free Inspection
                 </a>
             </div>
         </div>
     </section>
-</BaseLayout>
 
-<style>
-    /* ============================================================
-       CABECERA DE PÁGINA
+    <style>
+        /* ============================================================
+       PAGE HEADER
        ============================================================ */
-    .page-hero {
-        background-color: #0f172a;
-        color: #fff;
-        padding: 80px 24px;
-    }
+        .page-hero {
+            background-color: #0f172a;
+            color: #fff;
+            padding: 80px 24px;
+        }
 
-    .sec-subtitle {
-        color: #395ca0;
-        font-size: 0.85rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        display: block;
-        margin-bottom: 12px;
-    }
+        .sec-subtitle {
+            color: #395ca0;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 12px;
+        }
 
-    .page-hero h1 {
-        font-size: 2.75rem;
-        font-weight: 700;
-        line-height: 1.15;
-        margin-bottom: 20px;
-        letter-spacing: -1px;
-    }
+        .page-hero h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
 
-    .page-desc {
-        font-size: 1.15rem;
-        color: #cbd5e1;
-        line-height: 1.6;
-        max-width: 650px;
-        margin-bottom: 20px;
-    }
+        .page-desc {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            max-width: 650px;
+            margin-bottom: 20px;
+        }
 
-    .about-meta {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-        margin-top: 16px;
-    }
+        .about-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
 
-    .meta-item {
-        background-color: rgba(255, 255, 255, 0.08);
-        color: #e2e8f0;
-        padding: 6px 16px;
-        border-radius: 50px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-    }
+        .meta-item {
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
 
-    /* ============================================================
-       CUERPO DE CONTENIDO
+        /* ============================================================
+       CONTENT BODY
        ============================================================ */
-    .about-body {
-        padding: 72px 24px;
-    }
+        .about-body {
+            padding: 72px 24px;
+        }
 
-    /* ============================================================
-       CTA BANNER FINAL (igual que index2)
+        /* ============================================================
+       FINAL CTA BANNER (same as index2)
        ============================================================ */
-    .cta-banner {
-        padding: 80px 24px;
-    }
+        .cta-banner {
+            padding: 80px 24px;
+        }
 
-    .cta-banner-box {
-        background-color: #395ca0;
-        border-radius: 16px;
-        padding: 48px 60px;
-        color: #fff;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 40px;
-        box-shadow: 0 20px 45px rgba(57, 92, 160, 0.25);
-    }
+        .cta-banner-box {
+            background-color: #395ca0;
+            border-radius: 16px;
+            padding: 48px 60px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            box-shadow: 0 20px 45px rgba(57, 92, 160, 0.25);
+        }
 
-    .cta-text-cnt {
-        max-width: 600px;
-    }
+        .cta-text-cnt {
+            max-width: 600px;
+        }
 
-    .cta-banner-box h2 {
-        font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 12px;
-        line-height: 1.2;
-    }
+        .cta-banner-box h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
 
-    .cta-banner-box p {
-        font-size: 1.1rem;
-        color: #e2e8f0;
-        line-height: 1.5;
-        margin: 0;
-    }
+        .cta-banner-box p {
+            font-size: 1.1rem;
+            color: #e2e8f0;
+            line-height: 1.5;
+            margin: 0;
+        }
 
-    /* .btn-white-accent {
+        /* .btn-white-accent {
         background-color: #fff;
         color: #395ca0;
         background-color: #4a7fd4;
@@ -217,15 +216,16 @@ const { Content } = await render(about);
         transform: translateY(-2px);
     } */
 
-    @media (max-width: 768px) {
-        .page-hero h1 {
-            font-size: 1.9rem;
-        }
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 1.9rem;
+            }
 
-        .cta-banner-box {
-            flex-direction: column;
-            text-align: center;
-            padding: 36px 28px;
+            .cta-banner-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 36px 28px;
+            }
         }
-    }
-</style>
+    </style>
+</BaseLayout>

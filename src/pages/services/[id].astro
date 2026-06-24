@@ -1,19 +1,19 @@
 ---
 //
-// CONCEPTO CLAVE — getStaticPaths():
-// Astro es un generador de sitios estáticos. Necesita saber de antemano
-// cuántas páginas va a generar y cuál es la URL de cada una.
+// CORE CONCEPT — getStaticPaths():
+// Astro is a static site generator. It needs to know in advance
+// how many pages to build and what the URL of each one will be.
 //
-// getStaticPaths() le dice a Astro:
-//   "Para cada archivo .md que encuentres, crea una página en /services/{id}"
+// getStaticPaths() tells Astro:
+//   "For each .md file found, create a page at /services/{id}"
 //
-// params: { id: service.id }   →  el valor entre [] en la URL
+// params: { id: service.id }   →  the value between [] in the URL
 //   instalacion-residencial.md →  params.id = "instalacion-residencial" →  URL: /services/instalacion-residencial
 //   reparacion-goteras.md      →  params.id = "reparacion-goteras"      →  URL: /services/reparacion-goteras
 //   techado-comercial.md       →  params.id = "techado-comercial"       →  URL: /services/techado-comercial
 //   techos-de-metal.md         →  params.id = "techos-de-metal"         →  URL: /services/techos-de-metal
 //
-// props: { service }  →  datos disponibles en Astro.props dentro de la página
+// props: { service }  →  data available via Astro.props inside the page
 
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
@@ -27,30 +27,30 @@ export async function getStaticPaths() {
     }));
 }
 
-// Recibir el servicio como prop (definido arriba en getStaticPaths)
+// Receive the service as a prop (defined above in getStaticPaths)
 const { service } = Astro.props;
 
-// Convertir el markdown del cuerpo a componente HTML
+// Render the markdown body to an HTML component
 const { Content } = await render(service);
 ---
 
 <BaseLayout title={`${service.data.title}`} description={service.data.tagline}>
-    <!-- HERO DE PÁGINA -->
+    <!-- PAGE HERO -->
     <section class="page-hero">
         <div class="container">
             <a href={`${import.meta.env.BASE_URL}services`} class="back-link"
-                >← Todos los servicios</a
+                >← All Services</a
             >
             <div class="hero-inner">
                 <span class="service-icon" aria-hidden="true">
                     {service.data.icon}
                 </span>
                 <div>
-                    <span class="sec-subtitle">Nuestros Servicios</span>
+                    <span class="sec-subtitle">Our Services</span>
                     <h1>{service.data.title}</h1>
                     <p class="service-tagline">{service.data.tagline}</p>
                     <p class="service-price">
-                        Estimado desde
+                        Starting from
                         <strong>${service.data.price} USD</strong>
                     </p>
                 </div>
@@ -58,7 +58,7 @@ const { Content } = await render(service);
         </div>
     </section>
 
-    <!-- CONTENIDO PRINCIPAL -->
+    <!-- MARKDOWN CONTENT -->
     <section class="service-content container">
         <div class="prose-wrapper">
             <div class="prose">
@@ -71,10 +71,10 @@ const { Content } = await render(service);
     <section class="cta-banner container">
         <div class="cta-banner-box">
             <div class="cta-text-cnt">
-                <h2>¿Interesado en este servicio?</h2>
+                <h2>Interested in this service?</h2>
                 <p>
-                    Contáctanos hoy y recibe una inspección gratuita y un
-                    presupuesto detallado en menos de 24 horas.
+                    Contact us today and receive a free inspection plus a
+                    detailed quote in less than 24 hours.
                 </p>
             </div>
             <div class="cta-action-cnt">
@@ -82,7 +82,7 @@ const { Content } = await render(service);
                     href={`${import.meta.env.BASE_URL}contact`}
                     class="btn-white-accent"
                 >
-                    Solicitar este Servicio →
+                    Request This Service →
                 </a>
             </div>
         </div>
@@ -90,7 +90,7 @@ const { Content } = await render(service);
 </BaseLayout>
 
 <style>
-    /* HERO DE PÁGINA */
+    /* PAGE HERO */
     .page-hero {
         background-color: #0f172a;
         color: #fff;
@@ -159,7 +159,7 @@ const { Content } = await render(service);
         font-size: 1.1rem;
     }
 
-    /* CONTENIDO MARKDOWN */
+    /* MARKDOWN CONTENT */
     .service-content {
         padding: 80px 24px;
     }
@@ -264,7 +264,7 @@ const { Content } = await render(service);
         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
     }
 
-    /* ---- SOPORTE MODO OSCURO ---- */
+    /* ---- DARK MODE SUPPORT ---- */
     @media (prefers-color-scheme: dark) {
         .sec-subtitle {
             color: #60a5fa;

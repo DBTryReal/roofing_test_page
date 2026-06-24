@@ -1,43 +1,43 @@
 ---
 // src/pages/contact.astro
 //
-// CONCEPTO CLAVE:
-// Esta página NO usa markdown. Es contenido completamente estático
-// definido directamente en el template HTML.
-// No necesita ninguna importación de "astro:content".
-// Ideal para formularios, páginas simples, páginas legales, etc.
+// CORE CONCEPT:
+// This page does NOT use markdown. It is fully static content
+// defined directly in the HTML template.
+// No imports from "astro:content" are needed.
+// Ideal for forms, simple pages, legal pages, etc.
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-// Puedes leer variables de entorno para la URL de la API
+// You can read environment variables for the API URL
 // const API_URL = import.meta.env.PUBLIC_FORM_URL;
 ---
 
 <BaseLayout
-    title="Contacto"
-    description="Escríbenos y te respondemos en menos de 24 horas. Inspecciones gratuitas en Carolina del Norte."
+    title="Contact"
+    description="Send us a message and we'll get back to you in less than 24 hours. Free inspections across North Carolina."
 >
     <!-- ============================================================
-         CABECERA DE PÁGINA
+         PAGE HEADER
          ============================================================ -->
     <section class="page-hero">
         <div class="container">
-            <span class="sec-subtitle">Estamos Para Ayudarte</span>
-            <h1>Hablemos</h1>
+            <span class="sec-subtitle">Here to Help</span>
+            <h1>Let's Talk</h1>
             <p class="page-desc">
-                Cuéntanos sobre tu proyecto. Te respondemos en menos de 24 horas
-                con una cotización sin compromiso.
+                Tell us about your project. We'll get back to you within 24
+                hours with a no-obligation quote.
             </p>
         </div>
     </section>
 
     <!-- ============================================================
-         FORMULARIO + DATOS DE CONTACTO
+         CONTACT FORM + CONTACT DETAILS
          ============================================================ -->
     <section class="contact-section">
         <div class="container">
             <div class="contact-grid">
-                <!-- Formulario de contacto -->
+                <!-- Contact form -->
                 <form
                     class="contact-form"
                     id="contact-form"
@@ -45,29 +45,29 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     action="/api/contact"
                 >
                     <div class="form-group">
-                        <label for="name">Nombre completo *</label>
+                        <label for="name">Full name *</label>
                         <input
                             type="text"
                             id="name"
                             name="name"
-                            placeholder="Juan Pérez"
+                            placeholder="John Smith"
                             required
                         />
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Correo electrónico *</label>
+                        <label for="email">Email address *</label>
                         <input
                             type="email"
                             id="email"
                             name="email"
-                            placeholder="juan@correo.com"
+                            placeholder="john@email.com"
                             required
                         />
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">Número de teléfono</label>
+                        <label for="phone">Phone number</label>
                         <input
                             type="tel"
                             id="phone"
@@ -77,74 +77,70 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     </div>
 
                     <div class="form-group">
-                        <label for="service">Servicio de interés</label>
+                        <label for="service">Service of interest</label>
                         <select id="service" name="service">
-                            <option value=""
-                                >-- Selecciona un servicio --</option
-                            >
+                            <option value="">-- Select a service --</option>
                             <option value="instalacion-residencial"
-                                >🏠 Instalación Residencial</option
+                                >🏠 Residential Installation</option
                             >
                             <option value="reparacion-goteras"
-                                >💧 Reparación de Goteras</option
+                                >💧 Leak Repair</option
                             >
                             <option value="techado-comercial"
-                                >🏢 Techado Comercial</option
+                                >🏢 Commercial Roofing</option
                             >
                             <option value="techos-metal"
-                                >🔩 Techos de Metal</option
+                                >🔩 Metal Roofing</option
                             >
                             <option value="inspeccion"
-                                >🔍 Solo Inspección</option
+                                >🔍 Inspection Only</option
                             >
-                            <option value="otro">Otro / No estoy seguro</option>
+                            <option value="otro">Other / Not sure</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="property">Tipo de propiedad</label>
+                        <label for="property">Property type</label>
                         <select id="property" name="property">
-                            <option value="">-- Selecciona una opción --</option
-                            >
+                            <option value="">-- Select an option --</option>
                             <option value="residencial"
-                                >Residencial (Casa / Townhouse)</option
+                                >Residential (House / Townhouse)</option
                             >
                             <option value="comercial"
-                                >Comercial (Nave / Oficina)</option
+                                >Commercial (Warehouse / Office)</option
                             >
                             <option value="multifamiliar"
-                                >Multifamiliar (Apartamentos)</option
+                                >Multi-family (Apartments)</option
                             >
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="message"
-                            >Cuéntanos sobre tu proyecto *</label
+                        <label for="message">Tell us about your project *</label
                         >
                         <textarea
                             id="message"
                             name="message"
                             rows="5"
-                            placeholder="Describe el problema o el trabajo que necesitas: tamaño aproximado del techo, daños visibles, urgencia, etc."
+                            placeholder="Describe the issue or work needed: approximate roof size, visible damage, urgency, etc."
                             required></textarea>
                     </div>
 
                     <button type="submit" class="submit-btn">
-                        Enviar mensaje →
+                        Send Message →
                     </button>
                 </form>
 
-                <!-- Información de contacto lateral -->
+                <!-- Sidebar contact information -->
                 <aside class="contact-info">
                     <div class="info-block">
-                        <h2>Información de contacto</h2>
+                        <h2>Contact Information</h2>
                     </div>
 
                     <div class="info-item">
                         <span class="info-icon">📞</span>
                         <div>
-                            <strong>Teléfono</strong>
+                            <strong>Phone</strong>
                             <p>(704) 000-0000</p>
                         </div>
                     </div>
@@ -160,24 +156,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     <div class="info-item">
                         <span class="info-icon">📍</span>
                         <div>
-                            <strong>Área de servicio</strong>
-                            <p>Wilmington, Raleigh, Greensboro y Durham, NC</p>
+                            <strong>Service Area</strong>
+                            <p>Wilmington, Raleigh, Greensboro & Durham, NC</p>
                         </div>
                     </div>
 
                     <div class="info-item">
                         <span class="info-icon">⏰</span>
                         <div>
-                            <strong>Horario</strong>
-                            <p>Lunes a Sábado, 7am – 6pm EST</p>
+                            <strong>Business Hours</strong>
+                            <p>Monday – Saturday, 7am – 6pm EST</p>
                         </div>
                     </div>
 
                     <div class="info-item">
                         <span class="info-icon">⚡</span>
                         <div>
-                            <strong>Tiempo de respuesta</strong>
-                            <p>Menos de 24 horas hábiles</p>
+                            <strong>Response Time</strong>
+                            <p>Within 24 business hours</p>
                         </div>
                     </div>
                 </aside>
@@ -188,7 +184,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <style>
     /* ============================================================
-       CABECERA DE PÁGINA
+       PAGE HEADER
        ============================================================ */
     .page-hero {
         background-color: #0f172a;
@@ -222,7 +218,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     /* ============================================================
-       SECCIÓN PRINCIPAL
+       MAIN SECTION
        ============================================================ */
     .contact-section {
         padding: 72px 24px;
@@ -247,7 +243,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     /* ============================================================
-       FORMULARIO
+       FORM
        ============================================================ */
     .contact-form {
         display: flex;
@@ -323,7 +319,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     /* ============================================================
-       INFORMACIÓN LATERAL
+       SIDEBAR INFORMATION
        ============================================================ */
     .contact-info {
         display: flex;

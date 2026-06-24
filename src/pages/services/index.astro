@@ -1,26 +1,18 @@
 ---
-// // import type { CollectionEntry } from "astro:content";
-// import BaseLayout from "../../layouts/BaseLayout.astro";
-
-// // interface Props {
-// //     service: CollectionEntry<"service">;
-// // }
-
-//
-// CONCEPTO CLAVE:
-// getCollection("services") carga TODOS los .md de la colección.
-// Devuelve un array de objetos, uno por cada archivo .md.
-// Aquí los ordenamos por el campo "order" del frontmatter.
+// CORE CONCEPT:
+// getCollection("services") loads ALL .md files from the collection.
+// Returns an array of objects, one per .md file.
+// Here we sort them by the "order" field in the frontmatter.
 
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ServiceCard from "../../components/ServiceCard.astro";
 
-// Carga todos los archivos .md (servicios y ordenarlos) de la carpeta services
+// Load all .md service files and sort them
 const services = await getCollection("services");
 
-// Ordenar por el campo "order" del frontmatter (ascendente)
-// Si no tienen order definido, quedan al final
+// Sort by the "order" frontmatter field (ascending)
+// Files without an order value are pushed to the end
 const sortedServices = services.sort((a, b) => {
     const orderA = a.data.order ?? 999;
     const orderB = b.data.order ?? 999;
@@ -29,29 +21,29 @@ const sortedServices = services.sort((a, b) => {
 ---
 
 <BaseLayout
-    title="Servicios de Techado"
-    description="Servicios profesionales de instalación, reparación y techado comercial en Carolina del Norte."
+    title="Roofing Services"
+    description="Professional roofing installation, repair, and commercial roofing services in North Carolina."
 >
-    <!-- HERO DE PÁGINA -->
+    <!-- PAGE HERO -->
     <section class="page-hero">
         <div class="container">
-            <span class="sec-subtitle">Nuestra especialidad</span>
-            <h1>Servicios Profesionales de Techado</h1>
+            <span class="sec-subtitle">Our Expertise</span>
+            <h1>Professional Roofing Services</h1>
             <p>
-                Soluciones integrales de techado residencial y comercial para
-                proteger tu propiedad en Carolina del Norte.
+                Comprehensive residential and commercial roofing solutions to
+                protect your property across North Carolina.
             </p>
         </div>
     </section>
 
-    <!-- LISTADO DE SERVICIOS -->
+    <!-- SERVICES LISTING -->
     <section class="services-listing container">
         <div class="section-header-cnt">
-            <span class="sec-subtitle">Lo que ofrecemos</span>
-            <h2>Todos Nuestros Servicios</h2>
+            <span class="sec-subtitle">What We Offer</span>
+            <h2>All Our Services</h2>
             <p class="section-desc">
-                Cada servicio incluye inspección inicial gratuita, materiales
-                certificados y garantía escrita de mano de obra.
+                Every service includes a free initial inspection, certified
+                materials, and a written labor warranty.
             </p>
         </div>
 
@@ -62,7 +54,7 @@ const sortedServices = services.sort((a, b) => {
         {
             sortedServices.length < 1 && (
                 <p class="empty-message">
-                    No hay servicios disponibles por el momento.
+                    No services available at the moment.
                 </p>
             )
         }
@@ -72,10 +64,10 @@ const sortedServices = services.sort((a, b) => {
     <section class="cta-banner container">
         <div class="cta-banner-box">
             <div class="cta-text-cnt">
-                <h2>¿Listo para proteger tu propiedad?</h2>
+                <h2>Ready to protect your property?</h2>
                 <p>
-                    Te hacemos una inspección sin costo y te entregamos un
-                    presupuesto detallado en menos de 24 horas.
+                    We'll perform a free inspection and deliver a detailed quote
+                    in less than 24 hours.
                 </p>
             </div>
             <div class="cta-action-cnt">
@@ -83,7 +75,7 @@ const sortedServices = services.sort((a, b) => {
                     href={`${import.meta.env.BASE_URL}contact`}
                     class="btn-white-accent"
                 >
-                    Agendar Mi Inspección Gratis
+                    Schedule My Free Inspection
                 </a>
             </div>
         </div>
@@ -91,7 +83,7 @@ const sortedServices = services.sort((a, b) => {
 </BaseLayout>
 
 <style>
-    /* HERO DE PÁGINA */
+    /* PAGE HERO */
     .page-hero {
         background-color: #0f172a;
         color: #fff;
@@ -123,7 +115,7 @@ const sortedServices = services.sort((a, b) => {
         max-width: 600px;
     }
 
-    /* LISTADO DE SERVICIOS */
+    /* SERVICES LISTING */
     .services-listing {
         padding: 80px 24px;
     }
